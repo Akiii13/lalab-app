@@ -1,162 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#f78da7">
+  <meta name="theme-color" content="#b07d3a">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Dubu 4th Anniversary</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jua&family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600&display=swap"
+    rel="stylesheet">
 </head>
+
 <body oncontextmenu="return false">
 
-<div class="bg-layer"></div>
-<div class="hearts-bg" id="heartsBg"></div>
+  <div class="bg-layer"></div>
+  <div class="hearts-bg" id="heartsBg"></div>
 
-<!-- Loading Screen -->
-<div id="loading-screen">
-  <div class="progress-container">
-    <div class="progress-wrapper">
-      <div class="progress-bar" id="progress-fill"></div>
+  <!-- Corner decorations -->
+  <img src="icons/feather-quill-bird-write-svgrepo-com.svg" class="deco-quill deco-quill--tl" alt="">
+  <img src="icons/feather-quill-bird-write-svgrepo-com.svg" class="deco-quill deco-quill--br" alt="">
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="progress-container">
+      <div class="progress-wrapper">
+        <div class="progress-bar" id="progress-fill"></div>
+      </div>
+      <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+      <div class="tap-text">Tap to continue...</div>
     </div>
-    <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
-    <div class="tap-text">Tap to continue...</div>
   </div>
-</div>
 
-<!-- Audio -->
-<audio id="bg-music"       src="music.mp3"          loop    playsinline></audio>
-<audio id="envelope-sound" src="envelope-sound.mp3"         playsinline></audio>
+  <!-- Audio -->
+  <audio id="bg-music" src="music.mp3" loop playsinline></audio>
+  <audio id="envelope-sound" src="envelope-sound.mp3" playsinline></audio>
 
-<button id="exit-btn" class="hidden" onclick="exitGame()">EXIT GAME</button>
+  <button id="exit-btn" class="hidden" onclick="exitGame()">EXIT</button>
 
-<div id="game-container" class="hidden">
+  <div id="game-container" class="hidden">
 
-  <!-- ══ ENVELOPE SCENE ══ -->
-  <div id="envelope-scene">
-    <div id="envelope-wrap">
-      <div id="envelope" onclick="openEnvelope()">
-        <div class="env-body">
-          <div class="env-lining"></div>
-          <div class="env-fold-left"></div>
-          <div class="env-fold-right"></div>
-          <div class="env-fold-bottom"></div>
-          <div class="env-crease-h"></div>
-          <div class="env-crease-diag-l"></div>
-          <div class="env-crease-diag-r"></div>
+    <!-- ══ ENVELOPE SCENE ══ -->
+    <div id="envelope-scene">
+      <div id="envelope-wrap">
+        <div id="envelope" onclick="openEnvelope()">
+          <div class="env-body">
 
-          <div class="env-face">
-            <div class="env-stamp">
-              <div class="env-stamp-inner">
-                <img src="icons/flower-duotone.svg" class="env-stamp-icon" alt="">
-                <div class="env-stamp-year">2025</div>
-              </div>
+            <div class="env-fold-top"></div>
+
+            <!-- FLAP -->
+            <div class="env-flap" id="envFlap">
+              <div class="env-flap-inner"></div>
+              <div class="env-flap-back"></div>
             </div>
-            <div class="env-postmark">
-              <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="35" cy="35" r="30" fill="none" stroke="#e91e8c" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.5"/>
-                <circle cx="35" cy="35" r="22" fill="none" stroke="#e91e8c" stroke-width="1" opacity="0.4"/>
-                <text x="50%" y="34%" text-anchor="middle" fill="#e91e8c" font-size="7" font-family="serif" opacity="0.6" dy=".3em">LOVE</text>
-                <text x="50%" y="56%" text-anchor="middle" fill="#e91e8c" font-size="6" font-family="serif" opacity="0.5" dy=".3em">MAIL</text>
+
+            <!-- ══ WAX SEAL ══ -->
+            <div class="env-seal" id="envSeal">
+              <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="waxBody" cx="38%" cy="30%" r="68%">
+                    <stop offset="0%" stop-color="#e8c99a" />
+                    <stop offset="30%" stop-color="#c9975a" />
+                    <stop offset="65%" stop-color="#a87040" />
+                    <stop offset="100%" stop-color="#6b3f18" />
+                  </radialGradient>
+                  <radialGradient id="waxEdge" cx="50%" cy="50%" r="50%">
+                    <stop offset="55%" stop-color="rgba(0,0,0,0)" />
+                    <stop offset="100%" stop-color="rgba(80,40,10,0.30)" />
+                  </radialGradient>
+                </defs>
+
+                <!-- Outer scalloped edge -->
+                <circle cx="45" cy="44.4" r="25.3" fill="none" stroke="rgba(80,40,5,0.25)" stroke-width="1.5" />
+                <circle cx="45" cy="44.4" r="24.2" fill="none" stroke="rgba(220,170,100,0.15)" stroke-width="0.8" />
+
+                <!-- Scalloped body fill -->
+                <path fill="url(#waxBody)" d="M77.115,50.297c-0.71-2.391-2.55-4.71-2.69-7.32c-0.069-1.5,0.82-2.521,0.601-3.92
+       c-0.2-1.3-1.67-2.2-1.601-3.74c0.15-2.95,3.28-3.53,4.021-6.34c0.979-3.7-1.69-4.979-4.69-5.33
+       c-2.109-0.24-4.41,0.28-6.26-1.08c-0.92-0.67-1.11-2.05-1.99-2.681c-1.51-1.079-3.47-0.68-5.13-1.329
+       c-2.45-0.97-4.6-3.38-6.69-4.91c-2.71-1.99-4.289-3.55-7.92-3.33c-7.359,0.44-10.229,9.22-16.989,11
+       c-4.851,1.28-11.521-2.069-12.681,5c-0.54,3.271,0.65,6.29,1.25,9.34c0.721,3.681-1.04,3.89-1.859,6.99
+       c-0.79,2.99,2.13,5.39,2.27,8.33c0.141,2.82-1.16,4.149-2.74,6.26c-5.01,6.64,1.381,11.11,8.08,11.74
+       c2.38,0.22,6.351-0.29,8.311,1.01c2.46,1.61,0.689,4.771,4.02,4.99c2.7,0.18,4.78-2.74,8-1.92
+       c2.91,0.74,2.86,3.189,5.07,4.58c5.79,3.66,8.72-5.87,12.59-7.59c3.24-1.44,4.46,0.689,6.42-2.73
+       c1.18-2.06,1.17-4.49,2.99-6.24c2.06-1.989,5.4-1.47,7.18-3.51C78.385,55.616,77.755,52.467,77.115,50.297z" />
+
+                <!-- Edge depth -->
+                <path fill="url(#waxEdge)" d="M77.115,50.297c-0.71-2.391-2.55-4.71-2.69-7.32c-0.069-1.5,0.82-2.521,0.601-3.92
+       c-0.2-1.3-1.67-2.2-1.601-3.74c0.15-2.95,3.28-3.53,4.021-6.34c0.979-3.7-1.69-4.979-4.69-5.33
+       c-2.109-0.24-4.41,0.28-6.26-1.08c-0.92-0.67-1.11-2.05-1.99-2.681c-1.51-1.079-3.47-0.68-5.13-1.329
+       c-2.45-0.97-4.6-3.38-6.69-4.91c-2.71-1.99-4.289-3.55-7.92-3.33c-7.359,0.44-10.229,9.22-16.989,11
+       c-4.851,1.28-11.521-2.069-12.681,5c-0.54,3.271,0.65,6.29,1.25,9.34c0.721,3.681-1.04,3.89-1.859,6.99
+       c-0.79,2.99,2.13,5.39,2.27,8.33c0.141,2.82-1.16,4.149-2.74,6.26c-5.01,6.64,1.381,11.11,8.08,11.74
+       c2.38,0.22,6.351-0.29,8.311,1.01c2.46,1.61,0.689,4.771,4.02,4.99c2.7,0.18,4.78-2.74,8-1.92
+       c2.91,0.74,2.86,3.189,5.07,4.58c5.79,3.66,8.72-5.87,12.59-7.59c3.24-1.44,4.46,0.689,6.42-2.73
+       c1.18-2.06,1.17-4.49,2.99-6.24c2.06-1.989,5.4-1.47,7.18-3.51C78.385,55.616,77.755,52.467,77.115,50.297z" />
+
+                <!-- Inner ring -->
+                <circle cx="45" cy="44.4" r="25.3" fill="none" stroke="rgba(60,30,5,0.25)" stroke-width="1.5" />
+                <circle cx="45" cy="44.4" r="24.2" fill="none" stroke="rgba(220,170,100,0.15)" stroke-width="0.8" />
+
+                <!-- Heart surface -->
+                <path fill="rgba(180,110,50,0.60)" stroke="rgba(220,170,100,0.70)" stroke-width="0.8" d="M56.677,36.237c-2.018-1.924-3.986-2.1-5.281-1.914c-2.499,0.361-4.504,2.283-5.73,3.801
+       c-1.225-1.518-3.23-3.439-5.729-3.801c-1.295-0.186-3.264-0.008-5.281,1.914c-0.988,0.943-2.066,2.651-1.579,5.43
+       c1.085,6.198,9.62,14.205,11.983,15.246c0.022,0.011,0.047,0.006,0.069,0.016c0.169,0.065,0.345,0.109,0.528,0.111
+       c0.184-0.002,0.359-0.046,0.528-0.111c0.022-0.01,0.047-0.005,0.069-0.016c2.363-1.041,10.899-9.047,11.984-15.246
+       C58.743,38.889,57.665,37.181,56.677,36.237z" />
               </svg>
             </div>
-            <div class="env-address">
-              <div class="env-addr-line long"></div>
-              <div class="env-addr-line medium"></div>
-              <div class="env-addr-line short"></div>
-            </div>
-            <div class="env-border-frame"></div>
-          </div>
 
-          <!-- FLAP -->
-          <div class="env-flap" id="envFlap">
-            <div class="env-flap-inner">
-              <div class="env-flap-lining"></div>
-              <div class="env-flap-crease"></div>
-            </div>
           </div>
-
-          <!-- WAX SEAL -->
-          <div class="env-seal" id="envSeal">
-            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="sealGrad" cx="35%" cy="30%">
-                  <stop offset="0%"   stop-color="#f06292"/>
-                  <stop offset="60%"  stop-color="#e91e8c"/>
-                  <stop offset="100%" stop-color="#880e4f"/>
-                </radialGradient>
-              </defs>
-              <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="4 3"/>
-              <circle cx="40" cy="40" r="30" fill="url(#sealGrad)"/>
-              <circle cx="40" cy="40" r="24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
-              <text x="50%" y="54%" text-anchor="middle" fill="white" font-size="22" font-family="Georgia,serif" font-weight="bold" dy=".1em">4</text>
-              <text x="40" y="16" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
-              <text x="40" y="67" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
-              <text x="12" y="43" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
-              <text x="68" y="43" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
-            </svg>
-          </div>
-
         </div>
       </div>
     </div>
+
+  </div><!-- end game-container -->
+
+  <div id="memory-container" class="hidden">
+    <div id="memory-scroll">
+
+      <!-- Header -->
+      <div class="memory-card header-card">
+        <div class="header-icons">
+          <img src="icons/envelope-duotone.svg" class="hdr-icon" alt="">
+          <img src="icons/heart-duotone.svg" class="hdr-icon hdr-icon--big" alt="">
+          <img src="icons/envelope-duotone.svg" class="hdr-icon" alt="">
+        </div>
+        <div class="header-title">Our 2025 Together</div>
+        <div class="header-sub">Every moment with you is a treasure</div>
+        <div class="header-icons header-icons--bottom">
+          <img src="icons/flower-svgrepo-com.svg" class="hdr-icon" alt="">
+          <img src="icons/heart-duotone.svg" class="hdr-icon" alt="">
+          <img src="icons/flower-svgrepo-com.svg" class="hdr-icon" alt="">
+        </div>
+      </div>
+
+      <!-- ── Photo Card 1 ── -->
+      <div class="memory-card">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 1</span>
+          </div>
+          <img src="pictures/1.png" alt="">
+        </div>
+        <p class="card-text">Ever since you came into my life, things just feel lighter, happier, and more meaningful.
+        </p>
+      </div>
+
+      <!-- ── Photo Card 2 ── -->
+      <div class="memory-card reverse">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 2</span>
+          </div>
+          <img src="pictures/2.png" alt="">
+        </div>
+        <p class="card-text">Being with you showed me what real love feels like, both giving it and receiving it.</p>
+      </div>
+
+      <!-- ── Photo Card 3 ── -->
+      <div class="memory-card">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 3</span>
+          </div>
+          <img src="pictures/3.png" alt="">
+        </div>
+        <p class="card-text">You inspire me to be a better person every single day.</p>
+      </div>
+
+      <!-- ── Photo Card 4 ── -->
+      <div class="memory-card reverse">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 4</span>
+          </div>
+          <img src="pictures/4.png" alt="">
+        </div>
+        <p class="card-text">I love you more than words can say, and I'm so lucky to call you mine.</p>
+      </div>
+
+      <!-- ── Photo Card 5 ── -->
+      <div class="memory-card">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 5</span>
+          </div>
+          <img src="pictures/5.png" alt="">
+        </div>
+        <p class="card-text">No matter what happens, I want you to know I'll always be here by your side.</p>
+      </div>
+
+      <!-- ── Photo Card 6 ── -->
+      <div class="memory-card reverse">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 6</span>
+          </div>
+          <img src="pictures/6.png" alt="">
+        </div>
+        <p class="card-text">You somehow make even my worst days feel lighter just by being there, even when we're just
+          on calls.</p>
+      </div>
+
+      <!-- ── Photo Card 7 ── -->
+      <div class="memory-card">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 7</span>
+          </div>
+          <img src="pictures/7.png" alt="">
+        </div>
+        <p class="card-text">No matter how far we are from each other, you always feel close to my heart.</p>
+      </div>
+
+      <!-- ── Photo Card 8 ── -->
+      <div class="memory-card reverse">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 8</span>
+          </div>
+          <img src="pictures/8.png" alt="">
+        </div>
+        <p class="card-text">I'm really grateful for every laugh, every talk, and every quiet moment we share together.
+        </p>
+      </div>
+
+      <!-- ── Photo Card 9 ── -->
+      <div class="memory-card">
+        <div class="card-img-wrap">
+          <div class="img-placeholder">
+            <img src="icons/heart-duotone.svg" class="placeholder-icon" alt="">
+            <span>Photo 9</span>
+          </div>
+          <img src="pictures/9.png" alt="">
+        </div>
+        <p class="card-text">I really treasure all the little memories we've made together, and I'm looking forward to
+          making many more with you.</p>
+      </div>
+
+      <!-- Love letter -->
+      <div class="memory-card letter-card">
+        <img src="icons/rose-7-svgrepo-com.svg" class="letter-icon-img" alt="">
+        <div class="letter-title">To my Pangga,</div>
+        <div class="letter-body">
+          I'm really grateful for us. Thank you for all the laughs, the playful bullying and teasing,<br><br>
+          the warmth, and for sticking with me through all the ups and downs.<br><br>
+          And thank you for choosing me over and over again. Here's to forever with you.
+        </div>
+        <div class="letter-sign">— bantot dudu</div>
+        <div class="letter-icon-row">
+          <img src="icons/heart-duotone.svg" class="letter-heart-icon" alt="">
+          <img src="icons/envelope-duotone.svg" class="letter-heart-icon" alt="">
+          <img src="icons/heart-duotone.svg" class="letter-heart-icon" alt="">
+          <img src="icons/envelope-duotone.svg" class="letter-heart-icon" alt="">
+          <img src="icons/heart-duotone.svg" class="letter-heart-icon" alt="">
+        </div>
+      </div>
+
+      <div style="height:80px;"></div>
+    </div>
   </div>
 
-</div><!-- end game-container -->
-
-<!--
-  IMPORTANT: #memory-container is a DIRECT CHILD OF BODY, not inside
-  #game-container. This is intentional — it avoids the stacking context
-  created by #game-container (position:fixed, z-index:10) which would
-  prevent overflow:hidden from reliably clipping the transformed
-  #memory-scroll child. As a body-level fixed element (z:25) it clips
-  cleanly, and #env-front-overlay (z:30, also body-level) sits on top.
--->
-<div id="memory-container" class="hidden">
-  <div id="memory-scroll">
-
-    <!-- Header -->
-    <div class="memory-card header-card">
-      <div class="header-icons">
-        <img src="icons/sparkle-duotone.svg"  class="hdr-icon" alt="">
-        <img src="icons/heart-duotone.svg"    class="hdr-icon hdr-icon--big" alt="">
-        <img src="icons/sparkle-duotone.svg"  class="hdr-icon" alt="">
-      </div>
-      <div class="header-title">Our 2025 Together</div>
-      <div class="header-sub">Every moment with you is a treasure</div>
-      <div class="header-icons header-icons--bottom">
-        <img src="icons/flower-duotone.svg"   class="hdr-icon" alt="">
-        <img src="icons/heart-duotone.svg"    class="hdr-icon" alt="">
-        <img src="icons/flower-duotone.svg"   class="hdr-icon" alt="">
-      </div>
-    </div>
-
-
-    <!-- Love letter -->
-    <div class="memory-card letter-card">
-      <img src="icons/envelope-open-duotone.svg" class="letter-icon-img" alt="">
-      <div class="letter-title">To my Dubu,</div>
-      <div class="letter-body">
-        Four years of loving you and it still feels brand new every single day.<br><br>
-        Thank you for your laughter, your patience, your warmth — and for choosing me, again and again.<br><br>
-        Here's to forever with you.
-      </div>
-      <div class="letter-sign">— always yours</div>
-      <div class="letter-icon-row">
-        <img src="icons/heart-duotone.svg"    class="letter-heart-icon" alt="">
-        <img src="icons/sparkle-duotone.svg"  class="letter-heart-icon" alt="">
-        <img src="icons/heart-duotone.svg"    class="letter-heart-icon" alt="">
-        <img src="icons/sparkle-duotone.svg"  class="letter-heart-icon" alt="">
-        <img src="icons/heart-duotone.svg"    class="letter-heart-icon" alt="">
-      </div>
-    </div>
-
-    <div style="height:80px;"></div>
-  </div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
