@@ -1,0 +1,208 @@
+* {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+body {
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  font-family: 'Jua', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+.page {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+}
+.page.active {
+  display: flex;
+}
+#header {
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+#header video {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+}
+p {
+  color: #a20060;
+}
+.button-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 0;
+}
+.button {
+  font-family: 'Jua', sans-serif;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.button:hover {
+  background-color: #DEB5BF;
+  transform: scale(1.05);
+}
+#yes-button, .yes-big {
+  background-color: #f78da7;
+}
+#fancy-message {
+  font-size: 22px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+.img-message {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-top: 15px;
+}
+#exit-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+  padding: 10px 20px; 
+  background-color: #f78da7;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+}
+#exit-button:hover {
+  background-color: #d16b80;
+  transform: scale(1.05);
+}
+.faded-button {
+  opacity: 0.2;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.faded-button:hover {
+  opacity: 0.4;
+  transform: scale(1.05);
+}
+.responsive-video {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+@media (max-width: 500px) {
+  .button {font-size: 20px; padding: 18px 36px; background-color: #FFD1DC;}
+  #header {font-size: 22px;}
+  #exit-button {font-size: 16px; padding: 10px 20px;}
+}
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  color: #a20060;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jua', sans-serif;
+  font-size: 28px;
+  z-index: 9999;
+}
+.progress-container {
+  position: relative;
+  width: 80%;
+  max-width: 300px;
+  height: 80px;
+}
+.progress-wrapper {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  height: 30px;
+  background: #ffe0ec;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f78da7, #ffb6c1);
+  width: 0%;
+  transition: width 0.3s linear;
+}
+#progress-icon {
+  position: absolute;
+  bottom: 55px;
+  width: 80px;
+  height: auto;
+  transform: translateY(50%);
+  opacity: 0;
+  transition: left 0.2 linear;
+  z-index: 3;
+  pointer-events: none;
+}
+@keyframes blink {
+  0%, 100% {opacity: 1;}
+  50% {opacity: 0.4;}
+}
+.tap-text {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  font-size: 24px;
+  color: #a20060;
+  animation: blink 1s infinite;
+  pointer-events: none;
+}
+.tap-text.show {
+  display: block;
+  animation: tapFadeIn 0.8s ease forwards;
+}
+.tap-text.loop {
+  animation: tapFadeLoop 1.2s ease-in-out infinite;
+}
+@keyframes tapFadeIn {
+  0% {opacity: 0; transform: translateY(10px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+@keyframes tapFadeLoop {
+  0%, 100% {opacity: 1;}
+  50% {opacity: 0.2;}
+}
+#loading-screen.exit {
+  animation: loaderExitUp 0.6s ease forwards;
+}
+@keyframes loaderExitUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100%);}
+}

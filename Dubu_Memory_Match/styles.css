@@ -1,0 +1,298 @@
+* {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  font-family: 'Jua', sans-serif;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  position: relative;
+}
+h1 {
+  font-size: 30px;
+  margin: 100px 0 20px;
+  color: #a20060;
+  text-align: center;
+}
+#winDialog p {
+  color: #a20060;
+}
+#doubleNyeheyyySection h2 {
+  color: #a20060;
+}
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22vw, 1fr));
+  gap: 2vw;
+  max-width: 100vw;
+  padding: 2vw;
+  justify-content: center;
+  justify-items: center;
+}
+.card {
+  width: 22vw;
+  height: 22vw;
+  max-width: 100px;
+  max-height: 100px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.card video,
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.card img.hidden,
+.card video.hidden {
+  display: none;
+}
+.card.flipped video {
+  display: block;
+  z-index: 2;
+}
+.card.flipped img {
+  display: none;
+}
+.card.matched {
+  border: 2px solid #D45487;
+  cursor: default;
+}
+.card.matched img {
+  display: block;
+  z-index: 2;
+}
+#letterFromDuduContainer img {
+  width: 90vw;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 80px auto 30px;
+  border-radius: 10px;
+}
+.hidden {
+  display: none;
+}
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: aliceblue;
+  border: 2px solid #FFD1DC;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.dialog-content {
+  text-align: center;
+}
+.dialog button {
+  background-color: #f78da7;
+  font-family: 'Jua', sans-serif;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+.dialog button:hover {
+  transform: scale(1.05);
+}
+#noButton {
+  background-color: #FFD1DC;
+  font-family: 'Jua', sans-serif;
+  margin-right: 10px;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+#noButton.shrink {
+  transform: scale(0.7);
+}
+.hidden-button {
+  display: none;
+}
+#doubleNyeheyyySection {
+  text-align: center;
+  margin-top: 150px;
+}
+.nyeheyyy-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nyeheyyy-gif {
+  max-width: 300px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+#letterButton {
+  background-color: #ff66a3;
+  font-family: 'Jua', sans-serif;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+#letterButton:hover {
+  background-color: #D45487;
+  transform: scale(1.05);
+}
+#exit-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #f78da7;
+  border: none;
+  font-family: 'Jua', sans-serif;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 3000;
+  transition: transform 0.3s ease;
+}
+#exit-button:hover {
+  background-color: #d16b80;
+  transform: scale(1.05);
+}
+#playAgainButton {
+  background-color: #ff66a3;
+  color: white;
+  font-family: 'Jua', sans-serif;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease;
+}
+#playAgainButton:hover {
+  background-color: #D45487;
+  transform: scale(1.05);
+}
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  color: #a20060;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jua', sans-serif;
+  font-size: 28px;
+  z-index: 9999;
+}
+.progress-container {
+  position: relative;
+  width: 80%;
+  max-width: 300px;
+  height: 80px;
+}
+.progress-wrapper {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  height: 30px;
+  background: #ffe0ec;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f78da7, #ffb6c1);
+  width: 0%;
+  transition: width 0.3s linear;
+}
+#progress-icon {
+  position: absolute;
+  bottom: 55px;
+  width: 80px;
+  height: auto;
+  transform: translateY(50%);
+  opacity: 0;
+  transition: left 0.2 linear;
+  z-index: 3;
+  pointer-events: none;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.tap-text {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  font-size: 24px;
+  color: #a20060;
+  animation: blink 1s infinite;
+  pointer-events: none;
+}
+.tap-text.show {
+  display: block;
+  animation: tapFadeIn 0.8s ease forwards;
+}
+.tap-text.loop {
+  animation: tapFadeLoop 1.2s ease-in-out infinite;
+}
+@keyframes tapFadeIn {
+  0% {opacity: 0; transform: translateY(10px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+@keyframes tapFadeLoop {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+#loading-screen.exit {
+  animation: loaderExitUp 0.6s ease forwards;
+}
+@keyframes loaderExitUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100%);}
+}

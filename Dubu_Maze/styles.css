@@ -1,0 +1,259 @@
+*{box-sizing:border-box;touch-action:manipulation}
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  max-width:100%;
+  top:0;
+  left:0;
+  overscroll-behavior:none;
+  -webkit-overflow-scrolling:auto
+}
+body{
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  font-family:'Jua',sans-serif;
+  margin:0;
+  padding:20px;
+  height: 100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  min-height:100vh;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+h2,p{text-align:center;color:#a20060;margin:5px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+input,button{font-size:16px;padding:10px 14px;border-radius:20px;outline:none;transition:.2s}
+input{width:230px;font-family:'Jua',sans-serif;background:#fff;border:1px solid #ccc}
+input:focus{border-color:#ff66a3;box-shadow:0 0 5px #ffc2d1}
+button{background:#f78da7;color:#fff;font-family:'Jua',sans-serif;font-weight:bold;border:none;cursor:pointer}
+#exit-btn{position:fixed;top:1vh;left:2vw;padding:10px 20px;border-radius:20px;background:#f78da7;z-index:9999;transition:.3s}
+#exit-btn:hover{background:#d16b80;transform:scale(1.05)}
+#exit-btn.hidden{display:none}
+#intro-screen {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 500px;
+  height: auto;
+  min-height: 70vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 25px;
+  z-index: 5000;
+  overflow-y: auto;
+  border: 3px solid #a20060;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+#intro-screen h1 {
+  color: #a20060;
+  margin-bottom: 12px;
+}
+#intro-screen p {
+  color: #a20060;
+  margin: 10px 0;
+  line-height: 1.4;
+}
+#intro-screen .intro-video {
+  max-width: 80%;
+  height: auto;
+  margin: 15px 0;
+}
+#intro-screen .note {
+  font-size: 0.95em;
+  color: #a20060;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+#intro-screen button {
+  background: #f78da7;
+  color: #fff;
+  font-family: 'Jua', sans-serif;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+  margin-top: 10px;
+}
+#intro-screen button:hover {
+  background: #d16b80;
+  transform: scale(1.05);
+}
+@media (max-width: 600px) {
+  #intro-screen h1 {
+    font-size: 1.2em;
+  }
+  #intro-screen p {
+    font-size: 0.8em;
+    max-width: 95%;
+  }
+  #intro-screen .note {
+    font-size: 0.8em;
+  }
+  #intro-screen button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+#mazeCanvas {
+  display: none;
+  background: #3d3d3d;
+  border: 3px solid #3d3d3d;
+  border-radius: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  max-width: 95vw;
+  max-height: 80vh;
+}
+#mobile-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.dpad {
+  display: grid;
+  grid-template-columns: 60px 60px 60px;
+  grid-template-rows: 60px 60px 60px;
+  gap: 8px;
+  align-items: center;
+  justify-items: center;
+}
+.arrow-btn {
+  background: #f78da7;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.2s;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arrow-btn .material-icons {
+  font-size: 2rem;
+  color: white;
+}
+.arrow-btn:active {
+  transform: scale(0.9);
+  background: #d16b80;
+}
+.up {
+  grid-column: 2;
+  grid-row: 1;
+}
+.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+.down {
+  grid-column: 2;
+  grid-row: 2;
+}
+.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+.hidden {
+  display: none;
+}
+#win-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+#win-popup.hidden {
+  display: none;
+}
+.popup-content {
+  background: #fff;
+  border: 3px solid #a20060;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+.popup-video {
+  max-width: 100%;
+  border-radius: 15px;
+}
+.popup-desc {
+  margin: 15px 0;
+  color: #a20060;
+  font-size: 0.8em;
+}
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.popup-buttons button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Jua', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  background: #f78da7;
+  color: #fff;
+  transition: 0.2s;
+}
+.popup-buttons button:hover,
+#next-btn:hover,
+#resolution-btn:hover,
+#end-btn:hover {
+  background: #d16b80;
+  transform: scale(1.05);
+}
+#win-popup, 
+#win-popup-2,
+#assurance-popup,
+#resolution-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+#win-popup.hidden,
+#win-popup-2.hidden,
+#assurance-popup.hidden,
+#resolution-popup.hidden {
+  display: none;
+}
+#loading-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom right,#ffe6f0,#ffd6ec);display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'Jua',sans-serif;z-index:9999}
+.progress-container{position:relative;width:80%;max-width:300px;height:80px}
+.progress-wrapper{position:absolute;bottom:30px;width:100%;height:30px;background:#ffe0ec;border-radius:25px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.1);z-index:1}
+.progress-bar{height:100%;background:linear-gradient(90deg,#f78da7,#ffb6c1);width:0;transition:width .3s linear}
+#progress-icon{position:absolute;bottom:55px;width:80px;transform:translateY(50%);opacity:0;z-index:3;pointer-events:none}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.tap-text{position:absolute;bottom:-40px;width:100%;text-align:center;display:none;opacity:0;font-size:24px;color:#a20060;animation:blink 1s infinite}
+.tap-text.show{display:block;animation:tapFadeIn .8s forwards}
+.tap-text.loop{animation:tapFadeLoop 1.2s infinite}
+@keyframes tapFadeIn{to{opacity:1;transform:translateY(0)}}@keyframes tapFadeLoop{50%{opacity:.2}}
+#loading-screen.exit{animation:loaderExitUp .6s forwards}
+@keyframes loaderExitUp{to{transform:translateY(-100%)}}

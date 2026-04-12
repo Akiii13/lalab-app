@@ -1,0 +1,328 @@
+* {
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+body {
+  font-family: 'Jua', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+input[type="text"] {
+  -webkit-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text;
+}
+h2, p {
+  text-align: center;
+  color: #a20060;
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 12px;
+  gap: 10px;
+}
+input, button {
+  font-size: 16px;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+input {
+  width: 230px;
+  font-family: 'Jua', sans-serif;
+  background: #fff;
+  border: 2px solid #a20060;
+}
+button {
+  background-color: #f78da7;
+  color: white;
+  font-family: 'Jua', sans-serif;
+  border: none;
+  cursor: pointer;
+}
+#notification {
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  max-width: 300px;
+  text-align: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(1);
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.success {
+  background-color: #ffe0f0;
+  color: #a0005a;
+  border: 1px solid #ffa1c6;
+  opacity: 1;
+  visibility: visible;
+}
+.error {
+  background-color: #ffe6e6;
+  color: #a30000;
+  border: 1px solid #ff9999;
+  opacity: 1;
+  visibility: visible;
+}
+#exit-btn {
+  position: fixed;
+  max-width: fit-content;
+  top: 1vh;
+  left: 2vw;
+  width: 128.02px;
+  height: 38px;
+  background-color: #f78da7;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-family: 'Jua', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  transition: transform 0.3s ease;
+}
+#exit-btn:hover {
+  background-color: #d16b80;
+  transform: scale(1.05);
+}
+#exit-btn.hidden {
+  display: none;
+}
+.rose-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+}
+.rose-container.hidden {
+  display: none;
+}
+.rose {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  animation: yidon 5s infinite;
+}
+.petal {
+  width: 50px;
+  height: 50px;
+  left:26%;
+  background: #fe7696;
+  border-radius: 0px 50%;
+  position: absolute;
+  box-shadow: 0 0 10px #D1123F;
+  z-index: 2;
+  transform-origin: bottom right;
+  animation: zhankai2 10s infinite;
+}
+.petal:nth-child(2) {
+  transform: rotate(90deg);
+  background: #fe7696;
+  left:20%;
+  animation: zhankai1 10s infinite;
+}
+.petal:nth-child(3) {
+  width: 40px;
+  height: 40px;
+  left:30%;
+  top: -20px;
+  z-index: 1;
+  background: #f03a64;
+  animation: zhankai2 10s infinite;
+}
+.petal:nth-child(4) {
+  width: 40px;
+  height: 40px;
+  left:25%;
+  top: -20px;
+  z-index: 1;
+  background: #f03a64;
+  transform: rotate(90deg);
+  animation: zhankai1 10s infinite;
+}
+.petal:nth-child(5) {
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
+  left:35%;
+  top: -30px;
+  z-index: 0;
+  background: #d1123f;
+}
+.leaf {
+  position: absolute;
+  top: 120px;
+  left: -20px;
+}
+.stem {
+  position: absolute;
+  top: -100px;
+  left: 114px;
+  width: 8px;
+  height: 200px;
+  background-color: #77a377;
+  border-radius: 50% 50%;
+  transform: translateX(-50%);
+}
+.leafs {
+  width: 30px;
+  height: 20px;
+  border-radius: 0 50%;
+  background: #77a377;
+  position: absolute;
+  top: 5px;
+  left: 112px;
+  transform: rotate(-50deg);
+}
+.leafs:nth-child(3) {
+  width: 40px;
+  height: 30px;
+  top: -20px;
+  left: 71px;
+  transform: rotate(1deg);
+}
+@keyframes yidon {
+  50% {transform: translateY(5%);}
+  100% {transform: translateY(10%);}
+}
+@keyframes zhankai1 {
+  50% {transform: rotate(110deg);}
+  100% {transform: rotate(90deg);}
+}
+@keyframes zhankai2 {
+  50% {transform: rotate(-20deg);}
+  100% {transform: rotate(0deg);}
+}
+@media (max-width: 480px) {
+  input, button {width: 100%; font-size: 16px;}
+}
+@keyframes bounceClick {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.05);}
+  100% {transform: scale(1);}
+}
+.bounce {
+  animation: bounceClick 0.3s ease;
+}
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  color: #a20060;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jua', sans-serif;
+  font-size: 28px;
+  z-index: 9999;
+}
+.progress-container {
+  position: relative;
+  width: 80%;
+  max-width: 300px;
+  height: 80px;
+}
+.progress-wrapper {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  height: 30px;
+  background: #ffe0ec;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f78da7, #ffb6c1);
+  width: 0%;
+  transition: width 0.3s linear;
+}
+#progress-icon {
+  position: absolute;
+  bottom: 55px;
+  width: 80px;
+  height: auto;
+  transform: translateY(50%);
+  opacity: 0;
+  transition: left 0.2 linear;
+  z-index: 3;
+  pointer-events: none;
+}
+@keyframes blink {
+  0%, 100% {opacity: 1;}
+  50% {opacity: 0.4;}
+}
+.tap-text {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  font-size: 24px;
+  color: #a20060;
+  animation: blink 1s infinite;
+  pointer-events: none;
+}
+.tap-text.show {
+  display: block;
+  animation: tapFadeIn 0.8s ease forwards;
+}
+.tap-text.loop {
+  animation: tapFadeLoop 1.2s ease-in-out infinite;
+}
+@keyframes tapFadeIn {
+  0% {opacity: 0; transform: translateY(10px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+@keyframes tapFadeLoop {
+  0%, 100% {opacity: 1;}
+  50% {opacity: 0.2;}
+}
+#loading-screen.exit {
+  animation: loaderExitUp 0.6s ease forwards;
+}
+@keyframes loaderExitUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100%);}
+}

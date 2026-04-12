@@ -1,0 +1,64 @@
+--BODY--
+font-family: 'Jua', sans-serif;
+margin: 0;
+padding: 20px;
+Background Color: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 100vh;
+overflow-x: hidden;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+user-select: none;
+-webkit-tap-highlight-color: transparent;
+
+
+
+--EXIT BUTTON--
+Font Size: 16px
+position: fixed;
+max-width: fit-content;
+top: 1vh;
+left: 2vw;
+background-color: #f78da7;
+border: none;
+border-radius: 20px;
+color: white;
+font-family: 'Jua', sans-serif;
+cursor: pointer;
+z-index: 9999;
+padding: 10px 20px;
+transition: transform 0.3s ease;
+
+--EXIT BUTTON HOVER---
+background-color: #d16b80;
+transform: scale(1.05);
+
+
+
+--COLORS--
+Font Color: #a20060
+Button Font Color: #ffffff
+Cover/Canvas Color: #ffffff
+No Button: #FFD1DC
+No Button Hover Color: #DEB5BF
+Outline/Border Color: #D45487
+
+
+
+--SIZES--
+Title Size: 30px
+Hub Images Dimensions: 400 x 250
+
+
+
+--REGULAR / YES BUTTON--
+Font Size: 16px
+Font Family: 'Jua', sans-serif
+Button Color: #f78da7
+Button Hover Color: #d16b80
+Border-Radius: 20px;
+Cursor: pointer;
+Font Weight: bold;

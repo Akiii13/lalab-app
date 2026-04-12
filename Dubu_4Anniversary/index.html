@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#f78da7">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Dubu 4th Anniversary</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body oncontextmenu="return false">
+
+<div class="bg-layer"></div>
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar" id="progress-fill"></div>
+    </div>
+    <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+    <div class="tap-text">Tap to continue...</div>
+  </div>
+</div>
+
+<!-- Audio -->
+<audio id="bg-music"       src="music.mp3"          loop    playsinline></audio>
+<audio id="envelope-sound" src="envelope-sound.mp3"         playsinline></audio>
+
+<button id="exit-btn" class="hidden" onclick="exitGame()">EXIT GAME</button>
+
+<div id="game-container" class="hidden">
+
+  <!-- ══ ENVELOPE SCENE ══ -->
+  <div id="envelope-scene">
+    <div id="envelope-wrap">
+      <div id="envelope" onclick="openEnvelope()">
+        <div class="env-body">
+          <div class="env-lining"></div>
+          <div class="env-fold-left"></div>
+          <div class="env-fold-right"></div>
+          <div class="env-fold-bottom"></div>
+          <div class="env-crease-h"></div>
+          <div class="env-crease-diag-l"></div>
+          <div class="env-crease-diag-r"></div>
+
+          <div class="env-face">
+            <div class="env-stamp">
+              <div class="env-stamp-inner">
+                <img src="icons/flower-duotone.svg" class="env-stamp-icon" alt="">
+                <div class="env-stamp-year">2025</div>
+              </div>
+            </div>
+            <div class="env-postmark">
+              <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="35" cy="35" r="30" fill="none" stroke="#e91e8c" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.5"/>
+                <circle cx="35" cy="35" r="22" fill="none" stroke="#e91e8c" stroke-width="1" opacity="0.4"/>
+                <text x="50%" y="34%" text-anchor="middle" fill="#e91e8c" font-size="7" font-family="serif" opacity="0.6" dy=".3em">LOVE</text>
+                <text x="50%" y="56%" text-anchor="middle" fill="#e91e8c" font-size="6" font-family="serif" opacity="0.5" dy=".3em">MAIL</text>
+              </svg>
+            </div>
+            <div class="env-address">
+              <div class="env-addr-line long"></div>
+              <div class="env-addr-line medium"></div>
+              <div class="env-addr-line short"></div>
+            </div>
+            <div class="env-border-frame"></div>
+          </div>
+
+          <!-- FLAP -->
+          <div class="env-flap" id="envFlap">
+            <div class="env-flap-inner">
+              <div class="env-flap-lining"></div>
+              <div class="env-flap-crease"></div>
+            </div>
+          </div>
+
+          <!-- WAX SEAL -->
+          <div class="env-seal" id="envSeal">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="sealGrad" cx="35%" cy="30%">
+                  <stop offset="0%"   stop-color="#f06292"/>
+                  <stop offset="60%"  stop-color="#e91e8c"/>
+                  <stop offset="100%" stop-color="#880e4f"/>
+                </radialGradient>
+              </defs>
+              <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="4 3"/>
+              <circle cx="40" cy="40" r="30" fill="url(#sealGrad)"/>
+              <circle cx="40" cy="40" r="24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+              <text x="50%" y="54%" text-anchor="middle" fill="white" font-size="22" font-family="Georgia,serif" font-weight="bold" dy=".1em">4</text>
+              <text x="40" y="16" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
+              <text x="40" y="67" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
+              <text x="12" y="43" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
+              <text x="68" y="43" text-anchor="middle" fill="white" font-size="7" opacity="0.8">♥</text>
+            </svg>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end game-container -->
+
+<!--
+  IMPORTANT: #memory-container is a DIRECT CHILD OF BODY, not inside
+  #game-container. This is intentional — it avoids the stacking context
+  created by #game-container (position:fixed, z-index:10) which would
+  prevent overflow:hidden from reliably clipping the transformed
+  #memory-scroll child. As a body-level fixed element (z:25) it clips
+  cleanly, and #env-front-overlay (z:30, also body-level) sits on top.
+-->
+<div id="memory-container" class="hidden">
+  <div id="memory-scroll">
+
+    <!-- Header -->
+    <div class="memory-card header-card">
+      <div class="header-icons">
+        <img src="icons/sparkle-duotone.svg"  class="hdr-icon" alt="">
+        <img src="icons/heart-duotone.svg"    class="hdr-icon hdr-icon--big" alt="">
+        <img src="icons/sparkle-duotone.svg"  class="hdr-icon" alt="">
+      </div>
+      <div class="header-title">Our 2025 Together</div>
+      <div class="header-sub">Every moment with you is a treasure</div>
+      <div class="header-icons header-icons--bottom">
+        <img src="icons/flower-duotone.svg"   class="hdr-icon" alt="">
+        <img src="icons/heart-duotone.svg"    class="hdr-icon" alt="">
+        <img src="icons/flower-duotone.svg"   class="hdr-icon" alt="">
+      </div>
+    </div>
+
+
+    <!-- Love letter -->
+    <div class="memory-card letter-card">
+      <img src="icons/envelope-open-duotone.svg" class="letter-icon-img" alt="">
+      <div class="letter-title">To my Dubu,</div>
+      <div class="letter-body">
+        Four years of loving you and it still feels brand new every single day.<br><br>
+        Thank you for your laughter, your patience, your warmth — and for choosing me, again and again.<br><br>
+        Here's to forever with you.
+      </div>
+      <div class="letter-sign">— always yours</div>
+      <div class="letter-icon-row">
+        <img src="icons/heart-duotone.svg"    class="letter-heart-icon" alt="">
+        <img src="icons/sparkle-duotone.svg"  class="letter-heart-icon" alt="">
+        <img src="icons/heart-duotone.svg"    class="letter-heart-icon" alt="">
+        <img src="icons/sparkle-duotone.svg"  class="letter-heart-icon" alt="">
+        <img src="icons/heart-duotone.svg"    class="letter-heart-icon" alt="">
+      </div>
+    </div>
+
+    <div style="height:80px;"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

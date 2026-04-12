@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#f78da7">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Dubu Maze</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body oncontextmenu="return false">
+<div class="bg-layer"></div>
+<div id="loading-screen">
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar" id="progress-fill"></div>
+    </div>
+    <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+    <div class="tap-text">Tap to continue...</div>
+  </div>
+</div>
+<audio id="bg-music" src="music.mp3" loop playsinline></audio>
+<button id="exit-btn" class="hidden" onclick="exitGame()">EXIT GAME</button>
+<script src="script.js"></script>
+</body>
+</html>

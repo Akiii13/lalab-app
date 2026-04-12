@@ -1,0 +1,367 @@
+body {
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+  user-select: none;
+  font-family: 'Jua', sans-serif;
+}
+input, textarea, button {
+  touch-action: manipulation;
+}
+.game-container {
+  position: relative;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 20px;
+  border: 4px solid #a20060;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+#exit-game {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 128.02px;
+  height: 38px;
+  margin: 0px;
+  background-color: #f78da7;
+  font-size: 16px;
+  font-family: 'Jua', sans-serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 999;
+}
+#exit-game:hover {
+  background-color: #d16b80;
+}
+h1 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #a20060;
+}
+.note {
+  font-size: 14px;
+  color: #a20060;
+  margin-bottom: 20px;
+}
+#custom-note {
+  color: #a20060;
+  text-align: center;
+  margin-top: 15px;
+}
+.center-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
+.level-timer {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #a20060;
+}
+#level-count, #timer {
+  font-weight: bold;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px #0000001a;
+}
+#guess-input {
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto;
+  display: block;
+  box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
+  border-radius: 20px;
+  border: 2px solid #a20060;
+}
+input:focus {
+  border-color: #a20060;
+  outline: none;
+}
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px auto;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  font-family: 'Jua', sans-serif;
+  display: block;
+  border: none;
+  border-radius: 25px;
+  background-color: #ff66a3;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  background-color: #D45487;
+}
+#submit-guess:hover {
+  transform: none;
+  transition: none;
+  background-color: #ff66a3;
+}
+#exit-game {
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+#exit-game:hover {
+  transform: scale(1.05);
+  background-color: #d16b80;
+}
+#start-game {
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+#start-game:hover {
+  transform: scale(1.05);
+  background-color: #D45487;
+}
+#new-image {
+  background-color: #f78da7;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  max-width: 150px;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+#new-image.shrunk {
+  padding: 2px 5px;
+  font-size: 12px;
+  max-width: 100px;
+  background-color: #f78da7;
+}
+#failure-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px #0000001a;
+}
+#failure-note {
+  font-size: 18px;
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
+#failure-image, #failure-note, #back-button {
+  display: none;
+}
+#level-10-screen p {
+  color: #a20060;
+  font-weight: bold;
+  text-align: center;
+}
+#dont-save {
+  background-color: #FFD1DC;
+  position: absolute;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  max-width: 150px;
+  margin: 10px auto;
+  left: 32.5%;
+  display: block;
+  border-radius: 25px;
+  border: 4px solid #a20060;
+  cursor: pointer;
+}
+#message {
+  margin: 20px;
+  font-size: 18px;
+  color: green;
+  transform: scale(1.05);
+}
+#message.incorrect {
+  color: red;
+  transform: scale(1.05);
+}
+#random-image, #guess-input, #submit-guess, #new-image, #level-timer-container {
+  display: none;
+}
+#game-over-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
+#game-over p {
+  font-size: 16px;
+  color: #a20060;
+  margin-top: 20px;
+  text-align: center;
+}
+#time-travel-back {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  border: none;
+  border-radius: 25px;
+  background-color: #ff66a3;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+#time-travel-back:hover {
+  background-color: #D45487;
+  transform: scale(1.05);
+}
+@media (max-width: 400px) {
+  h1 {font-size: 20px;}
+  img {max-width: 250px;}
+  #guess-input, button {max-width: 250px;}
+}
+@media (min-width: 400px) and (max-width: 768px) {
+  h1 {font-size: 22px;}
+  img {max-width: 280px;}
+  #guess-input, button {max-width: 280px;}
+}
+@media (min-width: 769px) {
+  h1 {font-size: 26px;}
+  img {max-width: 350px;}
+  #guess-input, button {max-width: 350px;}
+}
+@keyframes bounceClick {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.05);}
+  100% {transform: scale(1);}
+}
+.bounce {
+  animation: bounceClick 0.3s ease;
+}
+@keyframes popFade {
+  0% {opacity: 0;transform: scale(0.8);}
+  100% {opacity: 1;transform: scale(1);}
+}
+#message {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+#message.show {
+  animation: popFade 0.3s ease;
+}
+@keyframes fadeZoom {
+  0% {opacity: 0;transform: scale(0.9);}
+  100% {opacity: 1;transform: scale(1);}
+}
+#random-image {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#random-image.show {
+  animation: fadeZoom 0.3s ease forwards;
+}
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  color: #a20060;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jua', sans-serif;
+  font-size: 28px;
+  z-index: 9999;
+}
+.progress-container {
+  position: relative;
+  width: 80%;
+  max-width: 300px;
+  height: 80px;
+}
+.progress-wrapper {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  height: 30px;
+  background: #ffe0ec;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #f78da7, #ffb6c1);
+  width: 0%;
+  transition: width 0.3s linear;
+}
+#progress-icon {
+  position: absolute;
+  bottom: 35px;
+  width: 80px;
+  height: auto;
+  transform: translateY(50%);
+  opacity: 0;
+  transition: left 0.2 linear;
+  z-index: 3;
+  pointer-events: none;
+  border: none;
+  box-shadow: none;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.tap-text {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  font-size: 24px;
+  color: #a20060;
+  animation: blink 1s infinite;
+  pointer-events: none;
+}
+.tap-text.show {
+  display: block;
+  animation: tapFadeIn 0.8s ease forwards;
+}
+.tap-text.loop {
+  animation: tapFadeLoop 1.2s ease-in-out infinite;
+}
+@keyframes tapFadeIn {
+  0% {opacity: 0; transform: translateY(10px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+@keyframes tapFadeLoop {
+  0%, 100% {opacity: 1;}
+  50% {opacity: 0.2;}
+}
+#loading-screen.exit {
+  animation: loaderExitUp 0.6s ease forwards;
+}
+@keyframes loaderExitUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100%);}
+}

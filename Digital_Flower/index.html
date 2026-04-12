@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Flower Drawer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+<body oncontextmenu="return false">
+  <div id="loading-screen">
+    <div class="progress-container">
+      <div class="progress-wrapper">
+        <div class="progress-bar" id="progress-fill"></div>
+      </div>
+      <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+      <div class="tap-text">Tap to continue...</div>
+    </div>
+  </div>
+  <audio id="bg-music" src="music.mp3" loop playsinline></audio>
+  <button id="exit-btn" class="hidden" onclick="exitGame()">EXIT GAME</button>
+  <h2 style="margin-top: 60px;">🌸 Flower For Bubu</h2>
+  <p><strong>Dudu:</strong> I have a gift for you >:33</p>
+  <div class="controls">
+    <input type="text" id="commandInput" placeholder="type here..." />
+    <button id="drawBtn">Send</button>
+  </div>
+  <div id="notification" class="hidden"></div>
+  <div class="rose-container hidden">
+    <div class="rose" id="rose">
+      <div class="flower">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="leaf">
+        <div class="stem"></div>
+        <div class="leafs"></div>
+        <div class="leafs"></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

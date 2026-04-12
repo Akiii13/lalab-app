@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Dubu Memory Match</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+<body oncontextmenu="return false">
+  <div id="loading-screen">
+    <div class="progress-container">
+      <div class="progress-wrapper">
+        <div class="progress-bar" id="progress-fill"></div>
+      </div>
+      <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+      <div class="tap-text">Tap to continue...</div>
+    </div>
+  </div>
+  <audio id="bg-music" src="music.mp3" loop playsinline></audio>
+  <button id="exit-button">EXIT GAME</button>
+  <h1>🧠 Dubu Memory Match</h1>
+  <div class="game-board" id="gameBoard"></div>
+  <div id="winDialog" class="dialog hidden">
+    <div class="dialog-content">
+      <p>Yeheyyy you won! Can I be your BANA DUDU again please? >:3</p>
+      <button id="noButton">no</button>
+      <button id="yesButton">YES!</button>
+    </div>
+  </div>
+  <div id="doubleNyeheyyySection" class="hidden">
+    <div class="nyeheyyy-content">
+      <video autoplay loop muted playsinline class="nyeheyyy-gif">
+        <source src="Yeheyyy.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <h2>DOUBLE NYEHEYYY!!</h2>
+      <button id="letterButton">LETTER FROM DUDU</button>
+    </div>
+  </div>
+  <div id="letterFromDuduContainer" class="hidden">
+    <img id="letterFromDuduImage" src="secret.png" alt="Letter from Dudu" loading="lazy">
+    <button id="playAgainButton">Play Again</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

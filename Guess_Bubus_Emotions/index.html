@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <title>Guess Bubu's Feelings</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="loading-screen">
+    <div class="progress-container">
+      <div class="progress-wrapper">
+        <div class="progress-bar" id="progress-fill"></div>
+      </div>
+      <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+      <div class="tap-text">Tap to continue...</div>
+    </div>
+  </div>
+  <audio id="bg-music" src="music.mp3" loop playsinline></audio>
+  <button id="exit-game">EXIT GAME</button>
+  <div class="game-container">
+    <h1>Guess Bubu's Emotions/Feelings</h1>
+    <div class="note">You are Dudu, and your mission is to immediately detect Bubu's feeling, or else he will bring disaster in Dudu and Bubu's world!!!</div>
+    <video id="intro-image" class="center-image" src="Dbp/impostor.mp4" autoplay muted playsinline loop></video>
+    <div class="level-timer" id="level-timer-container">
+      <div>Level: <span id="level-count">0</span></div>
+      <div>Time Remaining: <span id="timer">02:00</span></div>
+    </div>
+    <video id="random-image" src="" class="center-image" autoplay muted playsinline></video>
+    <input type="text" id="guess-input" placeholder="Enter your guess...">
+    <button id="submit-guess">Submit</button>
+    <button id="new-image">Give Up</button>
+    <button id="start-game">Save Dudu and Bubu's World</button>
+    <button id="dont-save">Don't Save Dudu and Bubu's World</button>
+    <div id="message"></div>
+    <div id="game-over" style="display:none;">
+      <video src="Dbp/leave.mp4" id="game-over-image" autoplay muted playsinline loop></video>
+      <p>Dudu didn't make Bubu happy on time (Bubu is impatient). Bubu leaves Dudu.</p>
+      <button id="time-travel-back">Go Back</button>
+    </div>
+    <div id="level-10-screen" style="display:none;">
+      <video src="Dbp/win.mp4" id="level-10-image" autoplay muted playsinline loop></video>
+      <p>Congratulations! You've reached Level 10. You saved Dudu and Bubu's World!</p>
+      <p>HAPPY BIRTHDAY PANGGAA... MWEHEHEHE!!!! >:DDD 🎉🎊🎂🎊🎉</p>
+      <button id="play-again">Play Again</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

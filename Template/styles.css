@@ -1,0 +1,48 @@
+*{box-sizing:border-box;touch-action:manipulation}
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  max-width:100%;
+  top:0;
+  left:0;
+  overscroll-behavior:none;
+  -webkit-overflow-scrolling:auto
+}
+body{
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  font-family:'Jua',sans-serif;
+  margin:0;
+  padding:20px;
+  height: 100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  min-height:100vh;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+h2,p{text-align:center;color:#a20060;margin:5px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+input,button{font-size:16px;padding:10px 14px;border-radius:20px;outline:none;transition:.2s}
+input{width:230px;font-family:'Jua',sans-serif;background:#fff;border:1px solid #ccc}
+input:focus{border-color:#ff66a3;box-shadow:0 0 5px #ffc2d1}
+button{background:#f78da7;color:#fff;font-family:'Jua',sans-serif;font-weight:bold;border:none;cursor:pointer}
+#exit-btn{position:fixed;top:1vh;left:2vw;padding:10px 20px;border-radius:20px;background:#f78da7;z-index:9999;transition:.3s}
+#exit-btn:hover{background:#d16b80;transform:scale(1.05)}
+#exit-btn.hidden{display:none}
+#loading-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom right,#ffe6f0,#ffd6ec);display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'Jua',sans-serif;z-index:9999}
+.progress-container{position:relative;width:80%;max-width:300px;height:80px}
+.progress-wrapper{position:absolute;bottom:30px;width:100%;height:30px;background:#ffe0ec;border-radius:25px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.1);z-index:1}
+.progress-bar{height:100%;background:linear-gradient(90deg,#f78da7,#ffb6c1);width:0;transition:width .3s linear}
+#progress-icon{position:absolute;bottom:55px;width:80px;transform:translateY(50%);opacity:0;z-index:3;pointer-events:none}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.tap-text{position:absolute;bottom:-40px;width:100%;text-align:center;display:none;opacity:0;font-size:24px;color:#a20060;animation:blink 1s infinite}
+.tap-text.show{display:block;animation:tapFadeIn .8s forwards}
+.tap-text.loop{animation:tapFadeLoop 1.2s infinite}
+@keyframes tapFadeIn{to{opacity:1;transform:translateY(0)}}@keyframes tapFadeLoop{50%{opacity:.2}}
+#loading-screen.exit{animation:loaderExitUp .6s forwards}
+@keyframes loaderExitUp{to{transform:translateY(-100%)}}

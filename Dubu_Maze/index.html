@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#f78da7">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Dubu Maze</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body oncontextmenu="return false">
+<div class="bg-layer"></div>
+<div id="loading-screen">
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar" id="progress-fill"></div>
+    </div>
+    <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+    <div class="tap-text">Tap to continue...</div>
+  </div>
+</div>
+<div id="win-popup" class="hidden">
+  <div class="popup-content">
+    <video class="popup-video" autoplay muted loop playsinline>
+      <source src="Characters/find1.mp4" type="video/mp4">
+    </video>
+    <p class="popup-desc">Dudu finally found Bubu! But Bubu<br>is still angry and keep on pushing dudu away.<br>Bubu run away again.</p>
+    <div class="popup-buttons">
+      <button id="giveup-btn">Give Up</button>
+      <button id="again-btn">Find Bubu Again</button>
+    </div>
+  </div>
+</div>
+<div id="win-popup-2" class="hidden">
+  <div class="popup-content">
+    <video class="popup-video" autoplay muted loop playsinline>
+      <source src="Characters/find2.mp4" type="video/mp4">
+    </video>
+    <p class="popup-desc">Dudu stop bubu from running away again<br>and forced bubu to listen to him first.<br>Bubu is crying but still listening to dudu.</p>
+    <button id="next-btn">Next</button>
+  </div>
+</div>
+<div id="assurance-popup" class="hidden">
+  <div class="popup-content">
+    <video class="popup-video" autoplay muted loop playsinline>
+      <source src="Characters/Assurance.mp4" type="video/mp4">
+    </video>
+    <p class="popup-desc">As Dudu and Bubu hugged, Dudu told Bubu<br>that he loves her so much and will never leave<br>her, even if she tries to push him away.</p>
+    <button id="resolution-btn">Resolution</button>
+  </div>
+</div>
+<div id="resolution-popup" class="hidden">
+  <div class="popup-content">
+    <video class="popup-video" autoplay muted loop playsinline>
+      <source src="Characters/Resolution.mp4" type="video/mp4">
+    </video>
+    <p class="popup-desc">Both Bubu and Dudu apologized. They were<br>happy to be together again and promised that<br>what happened would never happen again.</p>
+    <button id="end-btn">THE END</button>
+  </div>
+</div>
+<div id="intro-screen" class="intro">
+  <h1>Dubu Maze</h1>
+  <p>Bubu pushed Dudu away again, so now <br>Dudu has to find Bubu in the maze and<br>cuddle up to make things right. Guide<br>Dudu through the maze. Good luck!</p>
+  <video class="intro-video" autoplay muted loop playsinline>
+    <source src="intro.mp4" type="video/mp4">
+  </video>
+  <p class="note"><strong>Note:</strong> Use arrow keys to move.</p>
+  <button id="play-btn">Find Bubu</button>
+</div>
+<canvas id="mazeCanvas"></canvas>
+<div id="mobile-controls" class="hidden">
+  <div class="dpad" aria-label="Directional pad">
+    <button class="arrow-btn up" data-dir="up" aria-label="Move up">
+      <span class="material-icons">keyboard_arrow_up</span>
+    </button>
+    <button class="arrow-btn left" data-dir="left" aria-label="Move left">
+      <span class="material-icons">keyboard_arrow_left</span>
+    </button>
+    <button class="arrow-btn right" data-dir="right" aria-label="Move right">
+      <span class="material-icons">keyboard_arrow_right</span>
+    </button>
+    <button class="arrow-btn down" data-dir="down" aria-label="Move down">
+      <span class="material-icons">keyboard_arrow_down</span>
+    </button>
+  </div>
+</div>
+<audio id="bg-music" src="music.mp3" loop playsinline></audio>
+<button id="exit-btn" class="hidden" onclick="exitGame()">EXIT GAME</button>
+<script src="script.js"></script>
+</body>
+</html>
