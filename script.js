@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  const secretCard = document.querySelector('.game-card:nth-child(8) a');
+  const secretCard = document.querySelector('.game-card:nth-child(9) a');
   if (secretCard) {
     secretCard.addEventListener('click', (e) => {
       e.preventDefault();
