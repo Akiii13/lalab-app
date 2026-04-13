@@ -420,8 +420,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (loadingScreen) loadingScreen.style.display = 'none';
         document.body.style.overflow = '';
         sessionStorage.setItem('anniversary', 'true');
-        tryPlayMusic();
-        localStorage.setItem('musicConfirmed', 'yes');
         exitBtn?.classList.remove('hidden');
         launchGame();
       }, 600);
@@ -440,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loadingScreen) loadingScreen.style.display = 'none';
     exitBtn?.classList.remove('hidden');
     disableScroll();
-    armMusicOnInteraction();
     launchGame();
   }
 });
