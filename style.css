@@ -1,7 +1,4 @@
-/* ── Self-hosted Jua ──────────────────────────────────────────────
-   Download from: https://fonts.google.com/specimen/Jua
-   Place files at: fonts/Jua-Regular.woff2  and  fonts/Jua-Regular.ttf
-   ──────────────────────────────────────────────────────────────── */
+/* ── Self-hosted Jua ── */
 @font-face {
   font-family: 'Jua';
   src: url('fonts/Jua-Regular.woff2') format('woff2'),

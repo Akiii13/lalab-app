@@ -3,29 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Flower Drawer</title>
+  <meta name="theme-color" content="#b8476a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Flower For Bubu" />
+  <title>Flower For Bubu</title>
+  <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+  </script>
 </head>
 <body oncontextmenu="return false">
+
+  <!-- LOCKED: Loading screen — logic/structure/animation untouched -->
   <div id="loading-screen">
     <div class="progress-container">
       <div class="progress-wrapper">
         <div class="progress-bar" id="progress-fill"></div>
       </div>
-      <img src="../loadingscreen.png" alt="loader icon" id="progress-icon">
+      <img src="../loadingscreen.png" alt="loader icon" id="progress-icon" />
       <div class="tap-text">Tap to continue...</div>
     </div>
   </div>
+
   <audio id="bg-music" src="music.mp3" loop playsinline></audio>
+
+  <!-- LOCKED: Exit button — only colors changed -->
   <button id="exit-btn" class="hidden" onclick="exitGame()">EXIT GAME</button>
-  <h2 style="margin-top: 60px;">🌸 Flower For Bubu</h2>
-  <p><strong>Dudu:</strong> I have a gift for you >:33</p>
-  <div class="controls">
-    <input type="text" id="commandInput" placeholder="type here..." />
-    <button id="drawBtn">Send</button>
-  </div>
-  <div id="notification" class="hidden"></div>
+
+  <main class="card">
+    <h2>
+      <svg class="title-icon" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse cx="13" cy="6.5" rx="3.8" ry="5.5" fill="#e8a8be" opacity="0.92"/>
+        <ellipse cx="13" cy="19.5" rx="3.8" ry="5.5" fill="#e8a8be" opacity="0.92"/>
+        <ellipse cx="6.5" cy="13" rx="5.5" ry="3.8" fill="#e8a8be" opacity="0.92"/>
+        <ellipse cx="19.5" cy="13" rx="5.5" ry="3.8" fill="#e8a8be" opacity="0.92"/>
+        <ellipse cx="8.5" cy="8.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(45 8.5 8.5)"/>
+        <ellipse cx="17.5" cy="8.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(-45 17.5 8.5)"/>
+        <ellipse cx="8.5" cy="17.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(-45 8.5 17.5)"/>
+        <ellipse cx="17.5" cy="17.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(45 17.5 17.5)"/>
+        <circle cx="13" cy="13" r="4.2" fill="#b8476a"/>
+      </svg>
+      Flower For Bubu
+    </h2>
+    <p class="subtitle"><span class="label">Dudu:</span> I have a gift for you &gt;:33</p>
+    <div class="controls">
+      <input type="text" id="commandInput" placeholder="type here..." autocomplete="off" spellcheck="false" />
+      <button id="drawBtn">Send</button>
+    </div>
+    <div id="notification" class="hidden"></div>
+  </main>
+
   <div class="rose-container hidden">
     <div class="rose" id="rose">
       <div class="flower">
@@ -42,6 +73,7 @@
       </div>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
