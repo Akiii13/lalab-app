@@ -40,11 +40,15 @@
 html {
   height: 100%;
   height: -webkit-fill-available;
+  /* Fills iOS overscroll rubber-band area — matches body gradient midpoint */
+  background: #ffdcea;
 }
 
 body {
   font-family: 'Jua', sans-serif;
   background: linear-gradient(160deg, #fff5f9 0%, #ffdcea 55%, #ffe8f2 100%);
+  /* Anchor background so it doesn't tile/shift during overscroll */
+  background-attachment: fixed;
   min-height: 100vh;
   min-height: -webkit-fill-available;
   overflow-x: hidden;
@@ -54,6 +58,7 @@ body {
   padding-bottom: var(--safe-bottom);
   padding-left: var(--safe-left);
   padding-right: var(--safe-right);
+
 }
 
 /* ── Header ── */
@@ -67,6 +72,8 @@ body {
   border-bottom: 1px solid rgba(212, 84, 135, 0.14);
   box-shadow: var(--shadow-header);
   padding: 0.7rem 1rem;
+  /* Contain header repaints */
+  contain: layout style;
 }
 
 .header-inner {
@@ -139,6 +146,7 @@ body {
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
+  contain: strict;
 }
 
 .dh {
@@ -231,6 +239,7 @@ body {
   animation: cardIn 0.45s ease forwards;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
   will-change: transform, opacity;
+  contain: layout style;
 }
 
 .game-card:active {
@@ -346,6 +355,7 @@ body {
 .tap-text {
   font-family: 'Jua', sans-serif;
   visibility: hidden;
+  font-size: 24px;
   opacity: 0;
 }
 
@@ -369,12 +379,13 @@ body {
 
 #loading-screen.exit {
   animation: loaderExit 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  will-change: transform, opacity;
+  will-change: transform;
 }
 
+/* Slides up cleanly — no opacity fade so it looks like a real layer lifting */
 @keyframes loaderExit {
-  from { transform: translateY(0);     opacity: 1; }
-  to   { transform: translateY(-100%); opacity: 0; }
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
 }
 
 @keyframes shrinkThenBounceSize {
