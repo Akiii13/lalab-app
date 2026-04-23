@@ -40,25 +40,33 @@
 html {
   height: 100%;
   height: -webkit-fill-available;
-  /* Fills iOS overscroll rubber-band area — matches body gradient midpoint */
+  /* Fallback color fills iOS rubber-band area above/below content */
   background: #ffdcea;
+  overscroll-behavior: none;
+}
+
+/* position:fixed pseudo-element renders the gradient as a stable viewport layer.
+   background-attachment:fixed is intentionally avoided — broken on iOS Safari. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, #fff5f9 0%, #ffdcea 55%, #ffe8f2 100%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 body {
   font-family: 'Jua', sans-serif;
-  background: linear-gradient(160deg, #fff5f9 0%, #ffdcea 55%, #ffe8f2 100%);
-  /* Anchor background so it doesn't tile/shift during overscroll */
-  background-attachment: fixed;
+  background: transparent;
   min-height: 100vh;
   min-height: -webkit-fill-available;
   overflow-x: hidden;
-  /* Prevents iOS pull-to-refresh & rubber-band scroll in PWA */
   overscroll-behavior: none;
   padding-top: var(--safe-top);
   padding-bottom: var(--safe-bottom);
   padding-left: var(--safe-left);
   padding-right: var(--safe-right);
-
 }
 
 /* ── Header ── */
@@ -355,7 +363,6 @@ body {
 .tap-text {
   font-family: 'Jua', sans-serif;
   visibility: hidden;
-  font-size: 24px;
   opacity: 0;
 }
 

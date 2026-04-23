@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
   icon.src = 'icon-512.png';
   icon.id  = 'loading-icon';
   Object.assign(icon.style, {
-    width:        '152px',
-    height:       '152px',
+    width:        '96px',
+    height:       '96px',
     borderRadius: '22px',
     objectFit:    'contain',
     boxShadow:    '0 8px 28px rgba(162, 0, 96, 0.22)',
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   titleEl.textContent = 'LalaHub';
   Object.assign(titleEl.style, {
     fontFamily:  "'Jua', sans-serif",
-    fontSize:    '3rem',
+    fontSize:    '1.9rem',
     color:       '#a20060',
     letterSpacing: '0.06em',
     textShadow:  '0 1px 4px rgba(255, 105, 180, 0.3)',
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   tapText.textContent = 'Tap to continue';
   Object.assign(tapText.style, {
     fontFamily:    "'Jua', sans-serif",
-    fontSize:      '1.5rem',
+    fontSize:      '1.2rem',
     color:         '#d45487',
     visibility:    'hidden',
     letterSpacing: '0.04em',
