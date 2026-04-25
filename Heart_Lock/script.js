@@ -2,27 +2,69 @@ const digits = [0, 0, 0, 0];
 const correctCode = '0313';
 const canvas = document.getElementById('scratchCanvas');
 const ctx = canvas.getContext('2d');
+const SPOTIFY_URL = 'https://open.spotify.com/track/3LvrJEPQ61Vvj1t3Edg20X';
+
+let qrGenerated = false;
+let scratchComplete = false;
+let isScratching = false;
+
 function changeDigit(index, delta) {
   digits[index] = (digits[index] + delta + 10) % 10;
   document.getElementById(`digit-${index}`).textContent = digits[index];
   checkCode();
 }
+
 function checkCode() {
   const entered = digits.join('');
   if (entered === correctCode) {
     document.getElementById('lockScreen').style.display = 'none';
     document.getElementById('letterScreen').style.display = 'block';
-    resizeCanvas();
+    requestAnimationFrame(() => {
+      if (!qrGenerated) {
+        generateQR();
+        qrGenerated = true;
+      }
+      resizeCanvas();
+    });
   }
 }
+
+function generateQR() {
+  const qrDiv = document.getElementById('qrCode');
+  const size = qrDiv.offsetWidth || 120;
+  new QRCode(qrDiv, {
+    text: SPOTIFY_URL,
+    width: size,
+    height: size,
+    colorDark: '#000000',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+}
+
 function resizeCanvas() {
   const bounds = canvas.getBoundingClientRect();
   canvas.width = bounds.width;
   canvas.height = bounds.height;
-  ctx.fillStyle = '#c0c0c0';
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = '#c888a8';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  scratchComplete = false;
+  canvas.style.cursor = 'crosshair';
 }
+
+function getScratchPercent() {
+  const { data, width, height } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  let transparent = 0;
+  const total = width * height;
+  for (let i = 3; i < data.length; i += 4) {
+    if (data[i] < 10) transparent++;
+  }
+  return transparent / total;
+}
+
 function scratch(e) {
+  e.preventDefault();
   const rect = canvas.getBoundingClientRect();
   const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
   const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
@@ -30,7 +72,13 @@ function scratch(e) {
   ctx.beginPath();
   ctx.arc(x, y, 20, 0, Math.PI * 2);
   ctx.fill();
+
+  if (!scratchComplete && getScratchPercent() >= 0.8) {
+    scratchComplete = true;
+    canvas.style.cursor = 'pointer';
+  }
 }
+
 function lockAgain() {
   document.getElementById('letterScreen').style.display = 'none';
   document.getElementById('lockScreen').style.display = 'flex';
@@ -38,20 +86,49 @@ function lockAgain() {
   for (let i = 0; i < 4; i++) {
     document.getElementById(`digit-${i}`).textContent = '0';
   }
+  resizeCanvas();
 }
+
 function exitGame() {
   sessionStorage.removeItem('gameLoadedOnce');
   window.location.href = "../index.html";
 }
+
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault());
 document.body.onmousedown = e => e.preventDefault();
-canvas.addEventListener('mousedown', () => canvas.addEventListener('mousemove', scratch));
-canvas.addEventListener('mouseup', () => canvas.removeEventListener('mousemove', scratch));
-canvas.addEventListener('touchstart', scratch, { passive: false });
+
+// Scratch interactions
+canvas.addEventListener('mousedown', () => {
+  isScratching = true;
+  canvas.addEventListener('mousemove', scratch);
+});
+canvas.addEventListener('mouseup', () => {
+  isScratching = false;
+  canvas.removeEventListener('mousemove', scratch);
+});
+canvas.addEventListener('click', () => {
+  if (scratchComplete) window.open(SPOTIFY_URL, '_blank');
+});
+canvas.addEventListener('touchstart', (e) => {
+  isScratching = true;
+  scratch(e);
+}, { passive: false });
 canvas.addEventListener('touchmove', scratch, { passive: false });
-window.addEventListener('load', resizeCanvas);
-window.addEventListener('resize', resizeCanvas);
+canvas.addEventListener('touchend', (e) => {
+  isScratching = false;
+  if (scratchComplete) {
+    e.preventDefault();
+    window.open(SPOTIFY_URL, '_blank');
+  }
+}, { passive: false });
+
+window.addEventListener('resize', () => {
+  if (document.getElementById('letterScreen').style.display !== 'none') {
+    resizeCanvas();
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const music = document.getElementById('bg-music');
   const hasConfirmed = localStorage.getItem('musicConfirmed');
@@ -62,11 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressFill = document.getElementById('progress-fill');
   const progressIcon = document.getElementById('progress-icon');
   const progressWrapper = document.querySelector('.progress-wrapper');
-  const exitBtn = document.getElementById('exit-button');
+  const exitBtn = document.getElementById('exitButton');
+
   const tryPlayMusic = () => {
     if (music && music.paused) music.play().catch(() => {});
   };
+
   const easeInOutSine = t => -(Math.cos(Math.PI * t) - 1) / 2;
+
   const animateProgress = () => {
     const iconWidth = progressIcon.offsetWidth;
     const barWidth = progressWrapper.clientWidth;
@@ -96,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     requestAnimationFrame(step);
   };
+
   const enableTap = () => {
     const continueHandler = (e) => {
       e.preventDefault();
@@ -115,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', continueHandler, { passive: false });
     window.addEventListener('touchstart', continueHandler, { passive: false });
   };
+
   if (fromHub && !alreadyLoaded && loadingScreen && tapText) {
     document.body.style.overflow = 'hidden';
     if (exitBtn) exitBtn.style.display = 'none';

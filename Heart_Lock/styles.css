@@ -14,6 +14,8 @@ body * {
   -ms-user-select: none;
   user-select: none;
 }
+
+/* ── Exit button ── */
 #exitButton {
   position: fixed;
   top: 10px;
@@ -36,88 +38,124 @@ body * {
   background-color: #d16b80;
   transform: scale(1.05);
 }
+
+/* ── Lock Again button ── */
 #lockAgainButton {
   margin-top: 20px;
-  background-color: #ff66a3;
+  background-color: #e898b8;
   color: white;
   font-size: 16px;
   font-weight: bold;
   font-family: 'Jua', sans-serif;
   border: none;
   border-radius: 20px;
-  padding: 10px 20px;
+  padding: 10px 24px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease, background-color 0.25s ease;
 }
 #lockAgainButton:hover {
-  background-color: #D45487;
+  background-color: #c87898;
   transform: scale(1.05);
 }
+
+/* ── Lock screen layout ── */
 #lockScreen {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* ── Heart-shaped padlock wrapper ── */
 .lock-wrapper {
   position: relative;
-  max-width: 90vw;
-  width: 400px;
+  width: min(440px, 92vw);
 }
-.lock-wrapper img {
-  width: 100%;
+
+.heart-svg {
   display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
-.container {
+
+.lock-content {
   position: absolute;
-  top: 66%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 43% 20% 32%;
+  box-sizing: border-box;
+  gap: 10px;
 }
+
+.lock-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(14px, 4vw, 18px);
+  color: #8a2848;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* ── Digit inputs ── */
 .code-inputs {
   display: flex;
   justify-content: center;
-  gap: 3vw;
+  gap: clamp(6px, 2.5vw, 14px);
 }
+
 .digit-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20vw;
-  min-width: 30px;
-  max-width: 40px;
+  width: clamp(28px, 8vw, 38px);
 }
+
 .digit-box button {
   width: 100%;
-  height: 5vh;
-  font-size: 3.5vw;
-  border-radius: 4px;
+  aspect-ratio: 1.4 / 1;
+  font-size: clamp(10px, 3vw, 14px);
+  background-color: #f0b8d0;
+  color: #9a3858;
+  border: 1px solid #e098b8;
+  border-radius: 6px;
   padding: 0;
   cursor: pointer;
-  color: #fb9ca5;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  font-family: 'Jua', sans-serif;
 }
+.digit-box button:hover {
+  background-color: #e898b8;
+  transform: scale(1.08);
+}
+.digit-box button:active {
+  transform: scale(0.95);
+}
+
 .digit-value {
   width: 100%;
-  height: 32px;
-  font-size: 18px;
+  font-size: clamp(15px, 4.5vw, 20px);
   font-weight: bold;
+  font-family: 'Playfair Display', serif;
   text-align: center;
-  line-height: 32px;
+  line-height: 1.6;
+  color: #b03060;
   box-sizing: border-box;
-  color: #dd131c;
 }
-@media (max-width: 480px) {
-  .digit-box {width: 14vw;}
-  .digit-box button {height: 7vw; font-size: 4vw;}
-  .digit-value {height: 9vw; font-size: 5vw; line-height: 9vw;}
-}
+
+/* ── Letter screen ── */
 #letterScreen {
   display: none;
   height: 100vh;
-  background-color: #ffffff;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
 }
 #imageWrapper {
   display: flex;
@@ -129,24 +167,59 @@ body * {
 .relativeBox {
   position: relative;
   width: 90vw;
-  max-width: 1000px;
+  max-width: 700px;
 }
-#letterImage {
+
+#letterSvg {
   width: 100%;
   height: auto;
   display: block;
+  overflow: visible;
 }
+
+/*
+  SVG viewBox: 600 × 400
+  QR rect: x=365 y=105 w=180 h=180 (square)
+  Center: cx = 365+90 = 455  →  left = 455/600 = 75.83%
+          cy = 105+90 = 195  →  top  = 195/400 = 48.75%
+  CSS width  = 180/600 = 30%   (% of parent width)
+  CSS height = 180/400 = 45%   (% of parent height, since parent h = parent_w × 400/600)
+  No aspect-ratio — canvas elements ignore it; explicit h% is reliable.
+*/
+#qrCode {
+  position: absolute;
+  top: 48.75%;
+  left: 75.83%;
+  width: 30%;
+  height: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+#qrCode canvas,
+#qrCode img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
 #scratchCanvas {
   position: absolute;
-  top: 48%;
-  left: 70%;
-  width: 31%;
-  aspect-ratio: 1 / 1;
+  top: 48.75%;
+  left: 75.83%;
+  width: 30%;
+  height: 45%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  border-radius: 8px;
+  border-radius: 10px;
   touch-action: none;
+  cursor: crosshair;
 }
+
+/* ── Loading screen ── */
 #loading-screen {
   position: fixed;
   top: 0;
@@ -193,13 +266,13 @@ body * {
   height: auto;
   transform: translateY(50%);
   opacity: 0;
-  transition: left 0.2 linear;
+  transition: left 0.2s linear;
   z-index: 3;
   pointer-events: none;
 }
 @keyframes blink {
-  0%, 100% {opacity: 1;}
-  50% {opacity: 0.4;}
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 .tap-text {
   position: absolute;
@@ -223,17 +296,17 @@ body * {
   animation: tapFadeLoop 1.2s ease-in-out infinite;
 }
 @keyframes tapFadeIn {
-  0% {opacity: 0; transform: translateY(10px);}
-  100% {opacity: 1; transform: translateY(0);}
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 @keyframes tapFadeLoop {
-  0%, 100% {opacity: 1;}
-  50% {opacity: 0.2;}
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
 }
 #loading-screen.exit {
   animation: loaderExitUp 0.6s ease forwards;
 }
 @keyframes loaderExitUp {
-  0% {transform: translateY(0);}
-  100% {transform: translateY(-100%);}
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
 }
