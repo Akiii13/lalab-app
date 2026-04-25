@@ -13,7 +13,7 @@ function changeDigit(index, delta) {
   const el = document.getElementById(`digit-${index}`);
   el.textContent = digits[index];
   el.classList.remove('changed');
-  void el.offsetWidth; // force reflow to restart animation
+  void el.offsetWidth;
   el.classList.add('changed');
   checkCode();
 }
@@ -53,7 +53,7 @@ function resizeCanvas() {
   canvas.width = bounds.width;
   canvas.height = bounds.height;
   ctx.globalCompositeOperation = 'source-over';
-  ctx.fillStyle = '#a878d8'; // violet scratch overlay
+  ctx.fillStyle = '#a878d8';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   scratchComplete = false;
   canvas.style.cursor = 'crosshair';
@@ -69,6 +69,22 @@ function getScratchPercent() {
   return transparent / total;
 }
 
+function showScratchHint() {
+  let hint = document.getElementById('scratchHint');
+  if (!hint) {
+    hint = document.createElement('div');
+    hint.id = 'scratchHint';
+    hint.textContent = 'Tap to open';
+    canvas.parentElement.appendChild(hint);
+  }
+  hint.classList.add('visible');
+}
+
+function hideScratchHint() {
+  const hint = document.getElementById('scratchHint');
+  if (hint) hint.classList.remove('visible');
+}
+
 function scratch(e) {
   e.preventDefault();
   const rect = canvas.getBoundingClientRect();
@@ -82,6 +98,7 @@ function scratch(e) {
   if (!scratchComplete && getScratchPercent() >= 0.8) {
     scratchComplete = true;
     canvas.style.cursor = 'pointer';
+    showScratchHint();
   }
 }
 
@@ -95,6 +112,7 @@ function lockAgain() {
     document.getElementById(`digit-${i}`).textContent = '0';
   }
   resizeCanvas();
+  hideScratchHint();
 }
 
 function exitGame() {
@@ -150,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const exitBtn = document.getElementById('exitButton');
 
   const tryPlayMusic = () => {
-    if (music && music.paused) music.play().catch(() => {});
+    if (music && music.paused) music.play().catch(() => { });
   };
 
   const easeInOutSine = t => -(Math.cos(Math.PI * t) - 1) / 2;
