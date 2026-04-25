@@ -1,28 +1,23 @@
-/*
-  FONTS in ../fonts/
-  ─────────────────
-  Jua-Regular.woff2
-  Nunito-VariableFont_wght.woff2
-  PlayfairDisplay-Italic-VariableFont_wght.woff2
-*/
-
 @font-face {
   font-family: 'Jua';
-  src: url('../fonts/Jua-Regular.woff2') format('woff2');
+  src: url('../fonts/Jua-Regular.woff2') format('woff2'),
+       url('../fonts/Jua-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Nunito';
-  src: url('../fonts/Nunito-VariableFont_wght.woff2') format('woff2-variations');
+  src: url('../fonts/Nunito-VariableFont_wght.woff2') format('woff2-variations'),
+       url('../fonts/Nunito-VariableFont_wght.ttf') format('truetype-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Playfair Display';
-  src: url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.woff2') format('woff2-variations');
+  src: url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.woff2') format('woff2-variations'),
+       url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype-variations');
   font-weight: 400 900;
   font-style: italic;
   font-display: swap;
@@ -118,8 +113,8 @@ body * {
 /* ── Exit button ── */
 #exitButton {
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: calc(env(safe-area-inset-top) + 10px);
+  left: calc(env(safe-area-inset-left) + 10px);
   width: 128px;
   height: 38px;
   background-color: var(--v400);
