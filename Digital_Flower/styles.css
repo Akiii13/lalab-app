@@ -10,21 +10,22 @@
 
 /* ─── Tokens ─────────────────────────────────────────────────── */
 :root {
-  --clr-bg-a:        #fdeef5;
-  --clr-bg-b:        #f7dcea;
-  --clr-surface:     #fff9fc;
-  --clr-rose:        #b8476a;
-  --clr-rose-dark:   #94324f;
-  --clr-rose-light:  #e8a8be;
-  --clr-rose-pale:   #fce4ef;
-  --clr-text:        #5c1e34;
-  --clr-text-muted:  #a06878;
-  --clr-border:      #dda8bc;
-  --clr-shadow:      rgba(160, 50, 90, 0.10);
-  --clr-shadow-btn:  rgba(184, 71, 106, 0.32);
-  --radius-card:     24px;
-  --radius-input:    20px;
-  --transition:      0.25s ease;
+  --bg-a:           #e8f4ee;
+  --bg-b:           #cfe8d8;
+  --surface:        #f4faf7;
+  --accent:         #3a7d60;
+  --accent-dark:    #255c44;
+  --accent-mid:     #5a9e7c;
+  --accent-light:   #7ab89a;
+  --accent-pale:    #c8e8d8;
+  --text:           #1a3d2b;
+  --text-muted:     #5a7d6a;
+  --border:         #9ac8b0;
+  --shadow:         rgba(42, 100, 74, 0.10);
+  --shadow-btn:     rgba(58, 125, 96, 0.30);
+  --radius-card:    24px;
+  --radius-input:   20px;
+  --transition:     0.25s ease;
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────── */
@@ -33,26 +34,29 @@
   touch-action: manipulation;
 }
 
-/*
- * iOS rubber-band fix:
- * 1. html carries the solid fallback color so overscroll reveals theme
- *    color instead of white — works for both top and bottom bounce.
- * 2. overscroll-behavior: none on html suppresses the bounce reveal
- *    on supporting engines (Safari 16+, Chrome iOS).
- * 3. body uses background-attachment: fixed so the gradient is pinned
- *    to the viewport and never scrolls out of frame.
- * 4. overflow: hidden on html + overflow-y: auto on body confines
- *    scroll context, preventing double-scroll and horizontal bleed.
- */
 html {
   height: 100%;
-  background-color: var(--clr-bg-a); /* shown during rubber-band */
+  background-color: var(--bg-a);
   overscroll-behavior: none;
   overflow: hidden;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 15%, rgba(122, 184, 154, 0.40) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 85% 85%, rgba(90, 158, 124, 0.28) 0%, transparent 70%),
+    linear-gradient(140deg, var(--bg-a) 0%, var(--bg-b) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
 body {
   font-family: 'Jua', sans-serif;
+  background: transparent;
+  background-color: var(--bg-a);
   margin: 0;
   padding: 20px 16px 40px;
   min-height: 100%;
@@ -62,42 +66,29 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: none;
-  background:
-    /* Layer 1 — scattered micro-petal motif; 160×160 tile, 3 flowers at varying opacity */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cg%20transform='translate(28,32)'%20opacity='.09'%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(72)'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(144)'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(216)'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(288)'/%3E%3Ccircle%20r='2.5'%20fill='%23d4809a'/%3E%3C/g%3E%3Cg%20transform='translate(118,118)'%20opacity='.065'%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(72)'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(144)'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(216)'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(288)'/%3E%3Ccircle%20r='2'%20fill='%23d4809a'/%3E%3C/g%3E%3Cg%20transform='translate(75,92)'%20opacity='.05'%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(72)'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(144)'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(216)'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(288)'/%3E%3Ccircle%20r='1.5'%20fill='%23d4809a'/%3E%3C/g%3E%3C/svg%3E"),
-    /* Layer 2 — fractal noise grain; stitched 200×200 tile, opacity 3.8% */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.68'%20numOctaves='4'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='200'%20height='200'%20filter='url(%23n)'%20opacity='0.038'/%3E%3C/svg%3E"),
-    /* Layer 3-5 — depth gradient stack */
-    radial-gradient(ellipse 70% 50% at 15% 15%, rgba(255,210,230,0.55) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 85% 85%, rgba(248,196,218,0.45) 0%, transparent 70%),
-    linear-gradient(140deg, var(--clr-bg-a) 0%, var(--clr-bg-b) 100%);
-  background-size: 160px 160px, 200px 200px, auto, auto, auto;
-  background-attachment: fixed;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 input[type="text"] {
   -webkit-user-select: text !important;
-  -ms-user-select: text !important;
   user-select: text;
 }
 
 /* ─── Card ───────────────────────────────────────────────────── */
 .card {
-  background: var(--clr-surface);
+  background: var(--surface);
   border-radius: var(--radius-card);
   padding: 28px 24px 22px;
   width: 90%;
   max-width: 360px;
   margin-top: 64px;
   box-shadow:
-    0 1px 0 rgba(255,255,255,0.9) inset,
-    0 4px 28px var(--clr-shadow),
-    0 0 0 1px rgba(221,168,188,0.35);
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 4px 28px var(--shadow),
+    0 0 0 1px rgba(154, 200, 176, 0.35);
   animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -108,7 +99,7 @@ h2 {
   justify-content: center;
   gap: 10px;
   text-align: center;
-  color: var(--clr-text);
+  color: var(--text);
   margin: 0 0 6px;
   font-size: clamp(18px, 5vw, 22px);
   white-space: nowrap;
@@ -118,18 +109,18 @@ h2 {
 
 .title-icon {
   flex-shrink: 0;
-  filter: drop-shadow(0 1px 3px rgba(184,71,106,0.25));
+  filter: drop-shadow(0 1px 3px rgba(58, 125, 96, 0.25));
 }
 
 .subtitle {
   text-align: center;
-  color: var(--clr-text-muted);
+  color: var(--text-muted);
   margin: 0 0 18px;
   font-size: 15px;
 }
 
 .label {
-  color: var(--clr-rose);
+  color: var(--accent);
 }
 
 /* ─── Controls ───────────────────────────────────────────────── */
@@ -151,40 +142,40 @@ input, button {
 
 input {
   width: 210px;
-  background: var(--clr-rose-pale);
-  border: 1.5px solid var(--clr-border);
-  color: var(--clr-text);
+  background: var(--accent-pale);
+  border: 1.5px solid var(--border);
+  color: var(--text);
 }
 
 input::placeholder {
-  color: var(--clr-text-muted);
+  color: var(--text-muted);
   opacity: 0.7;
 }
 
 input:focus {
-  border-color: var(--clr-rose);
-  background: var(--clr-surface);
-  box-shadow: 0 0 0 3px rgba(184, 71, 106, 0.13);
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(58, 125, 96, 0.13);
 }
 
 #drawBtn {
-  background: var(--clr-rose);
+  background: var(--accent);
   color: #fff;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 10px var(--clr-shadow-btn);
+  box-shadow: 0 2px 10px var(--shadow-btn);
   letter-spacing: 0.02em;
 }
 
 #drawBtn:hover {
-  background: var(--clr-rose-dark);
+  background: var(--accent-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px var(--clr-shadow-btn);
+  box-shadow: 0 4px 14px var(--shadow-btn);
 }
 
 #drawBtn:active {
   transform: translateY(0);
-  box-shadow: 0 1px 6px var(--clr-shadow-btn);
+  box-shadow: 0 1px 6px var(--shadow-btn);
 }
 
 /* ─── Notification ───────────────────────────────────────────── */
@@ -208,32 +199,31 @@ input:focus {
 }
 
 .success {
-  background: #fde8f2;
-  color: var(--clr-text);
-  border: 1px solid #f0b0cc;
+  background: #ddf2e8;
+  color: var(--text);
+  border: 1px solid #9acbb0;
   opacity: 1;
   visibility: visible;
   animation: notifIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .error {
-  background: #ffe8e8;
-  color: #8a1c1c;
-  border: 1px solid #f5aab0;
+  background: #fdecea;
+  color: #7a2020;
+  border: 1px solid #e8b0a8;
   opacity: 1;
   visibility: visible;
   animation: notifIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* ─── Exit Button — LOCKED (color change only) ───────────────── */
+/* ─── Exit Button — LOCKED ───────────────────────────────────── */
 #exit-btn {
   position: fixed;
-  max-width: fit-content;
-  top: 1vh;
-  left: 2vw;
+  top: calc(env(safe-area-inset-top) + 10px);
+  left: calc(env(safe-area-inset-left) + 10px);
   width: 128.02px;
   height: 38px;
-  background-color: var(--clr-rose);
+  background-color: var(--accent);
   border: none;
   border-radius: 20px;
   color: white;
@@ -250,7 +240,7 @@ input:focus {
 }
 
 #exit-btn:hover {
-  background-color: var(--clr-rose-dark);
+  background-color: var(--accent-dark);
   transform: scale(1.05);
 }
 
@@ -274,7 +264,7 @@ input:focus {
   animation: roseIn 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* ─── Rose (preserved, colors unchanged) ─────────────────────── */
+/* ─── Rose (preserved) ───────────────────────────────────────── */
 .rose {
   width: 200px;
   height: 200px;
@@ -376,12 +366,8 @@ input:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background:
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cg%20transform='translate(28,32)'%20opacity='.09'%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(72)'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(144)'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(216)'/%3E%3Cellipse%20cy='-11'%20rx='3'%20ry='6'%20fill='%23c4607e'%20transform='rotate(288)'/%3E%3Ccircle%20r='2.5'%20fill='%23d4809a'/%3E%3C/g%3E%3Cg%20transform='translate(118,118)'%20opacity='.065'%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(72)'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(144)'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(216)'/%3E%3Cellipse%20cy='-9'%20rx='2.5'%20ry='5'%20fill='%23c4607e'%20transform='rotate(288)'/%3E%3Ccircle%20r='2'%20fill='%23d4809a'/%3E%3C/g%3E%3Cg%20transform='translate(75,92)'%20opacity='.05'%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(72)'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(144)'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(216)'/%3E%3Cellipse%20cy='-7'%20rx='2'%20ry='4'%20fill='%23c4607e'%20transform='rotate(288)'/%3E%3Ccircle%20r='1.5'%20fill='%23d4809a'/%3E%3C/g%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.68'%20numOctaves='4'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='200'%20height='200'%20filter='url(%23n)'%20opacity='0.038'/%3E%3C/svg%3E"),
-    linear-gradient(140deg, var(--clr-bg-a) 0%, var(--clr-bg-b) 100%);
-  background-size: 160px 160px, 200px 200px, auto;
-  color: var(--clr-text);
+  background: linear-gradient(140deg, var(--bg-a) 0%, var(--bg-b) 100%);
+  color: var(--text);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -403,7 +389,7 @@ input:focus {
   bottom: 30px;
   width: 100%;
   height: 30px;
-  background: var(--clr-rose-pale);
+  background: var(--accent-pale);
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -412,7 +398,7 @@ input:focus {
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--clr-rose-light), var(--clr-rose));
+  background: linear-gradient(90deg, var(--accent-light), var(--accent));
   width: 0%;
   transition: width 0.3s linear;
 }
@@ -437,8 +423,7 @@ input:focus {
   display: none;
   opacity: 0;
   font-size: 24px;
-  color: var(--clr-text);
-  animation: blink 1s infinite;
+  color: var(--text);
   pointer-events: none;
 }
 
@@ -455,7 +440,7 @@ input:focus {
   animation: loaderExitUp 0.6s ease forwards;
 }
 
-/* ─── Bounce (send button) ───────────────────────────────────── */
+/* ─── Bounce ─────────────────────────────────────────────────── */
 @keyframes bounceClick {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.05); }
@@ -495,11 +480,6 @@ input:focus {
 @keyframes zhankai2 {
   50%  { transform: rotate(-20deg); }
   100% { transform: rotate(0deg); }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
 }
 
 @keyframes tapFadeIn {

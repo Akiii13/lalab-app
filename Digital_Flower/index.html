@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#b8476a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#e8f4ee" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Flower For Bubu" />
   <title>Flower For Bubu</title>
   <link rel="manifest" href="manifest.json" />
@@ -18,7 +18,6 @@
 </head>
 <body oncontextmenu="return false">
 
-  <!-- LOCKED: Loading screen — logic/structure/animation untouched -->
   <div id="loading-screen">
     <div class="progress-container">
       <div class="progress-wrapper">
@@ -31,21 +30,20 @@
 
   <audio id="bg-music" src="music.mp3" loop playsinline></audio>
 
-  <!-- LOCKED: Exit button — only colors changed -->
-  <button id="exit-btn" class="hidden" onclick="exitGame()">EXIT GAME</button>
+  <button id="exit-btn" class="hidden">EXIT GAME</button>
 
   <main class="card">
     <h2>
       <svg class="title-icon" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <ellipse cx="13" cy="6.5" rx="3.8" ry="5.5" fill="#e8a8be" opacity="0.92"/>
-        <ellipse cx="13" cy="19.5" rx="3.8" ry="5.5" fill="#e8a8be" opacity="0.92"/>
-        <ellipse cx="6.5" cy="13" rx="5.5" ry="3.8" fill="#e8a8be" opacity="0.92"/>
-        <ellipse cx="19.5" cy="13" rx="5.5" ry="3.8" fill="#e8a8be" opacity="0.92"/>
-        <ellipse cx="8.5" cy="8.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(45 8.5 8.5)"/>
-        <ellipse cx="17.5" cy="8.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(-45 17.5 8.5)"/>
-        <ellipse cx="8.5" cy="17.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(-45 8.5 17.5)"/>
-        <ellipse cx="17.5" cy="17.5" rx="3.8" ry="5.5" fill="#d490aa" opacity="0.78" transform="rotate(45 17.5 17.5)"/>
-        <circle cx="13" cy="13" r="4.2" fill="#b8476a"/>
+        <ellipse cx="13" cy="6.5" rx="3.8" ry="5.5" fill="#7ab89a" opacity="0.92"/>
+        <ellipse cx="13" cy="19.5" rx="3.8" ry="5.5" fill="#7ab89a" opacity="0.92"/>
+        <ellipse cx="6.5" cy="13" rx="5.5" ry="3.8" fill="#7ab89a" opacity="0.92"/>
+        <ellipse cx="19.5" cy="13" rx="5.5" ry="3.8" fill="#7ab89a" opacity="0.92"/>
+        <ellipse cx="8.5" cy="8.5" rx="3.8" ry="5.5" fill="#5a9e7c" opacity="0.78" transform="rotate(45 8.5 8.5)"/>
+        <ellipse cx="17.5" cy="8.5" rx="3.8" ry="5.5" fill="#5a9e7c" opacity="0.78" transform="rotate(-45 17.5 8.5)"/>
+        <ellipse cx="8.5" cy="17.5" rx="3.8" ry="5.5" fill="#5a9e7c" opacity="0.78" transform="rotate(-45 8.5 17.5)"/>
+        <ellipse cx="17.5" cy="17.5" rx="3.8" ry="5.5" fill="#5a9e7c" opacity="0.78" transform="rotate(45 17.5 17.5)"/>
+        <circle cx="13" cy="13" r="4.2" fill="#3a7d60"/>
       </svg>
       Flower For Bubu
     </h2>
