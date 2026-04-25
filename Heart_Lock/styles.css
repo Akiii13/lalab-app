@@ -1,17 +1,117 @@
+/*
+  FONTS in ../fonts/
+  ─────────────────
+  Jua-Regular.woff2
+  Nunito-VariableFont_wght.woff2
+  PlayfairDisplay-Italic-VariableFont_wght.woff2
+*/
+
+@font-face {
+  font-family: 'Jua';
+  src: url('../fonts/Jua-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('../fonts/Nunito-VariableFont_wght.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.woff2') format('woff2-variations');
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Palette ── */
+:root {
+  --v900: #1e0f50;
+  --v800: #2e1a72;
+  --v700: #4a2d90;
+  --v600: #6040a8;
+  --v500: #7a52c0;
+  --v400: #9a72d8;
+  --v300: #bfa0ec;
+  --v200: #dcd2f8;
+  --v100: #eee8ff;
+  --v50:  #f6f3ff;
+  --surface: #f8f5ff;
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-9px); }
+}
+@keyframes screenFadeIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0px); }
+}
+@keyframes digitPop {
+  0%   { transform: scaleY(0.7) scaleX(0.92); opacity: 0.5; }
+  60%  { transform: scaleY(1.08) scaleX(1.02); }
+  100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes tapFadeIn {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes tapFadeLoop {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+@keyframes loaderExitUp {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+/* ── Base — iOS overscroll fix ── */
+html {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Jua', sans-serif;
-  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  font-family: 'Nunito', sans-serif;
   -webkit-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
   touch-action: manipulation;
+  overscroll-behavior: none;
 }
+
+body {
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+  height: 100dvh;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--v100);
+  background-image:
+    radial-gradient(ellipse at 18% 22%, rgba(154, 114, 216, 0.28) 0%, transparent 52%),
+    radial-gradient(ellipse at 82% 78%, rgba(122, 82, 192, 0.20) 0%, transparent 52%),
+    radial-gradient(ellipse at 55% 10%, rgba(191, 160, 236, 0.18) 0%, transparent 45%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='1.4' fill='%237a52c0' opacity='0.13'/%3E%3Ccircle cx='10' cy='10' r='0.9' fill='%237a52c0' opacity='0.09'/%3E%3Ccircle cx='70' cy='70' r='0.9' fill='%237a52c0' opacity='0.09'/%3E%3Ccircle cx='70' cy='10' r='0.65' fill='%237a52c0' opacity='0.07'/%3E%3Ccircle cx='10' cy='70' r='0.65' fill='%237a52c0' opacity='0.07'/%3E%3Ccircle cx='25' cy='55' r='0.5' fill='%237a52c0' opacity='0.05'/%3E%3Ccircle cx='55' cy='25' r='0.5' fill='%237a52c0' opacity='0.05'/%3E%3C/svg%3E"),
+    linear-gradient(145deg, var(--v100) 0%, var(--v200) 100%);
+}
+
 body * {
   -webkit-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -22,8 +122,8 @@ body * {
   left: 10px;
   width: 128px;
   height: 38px;
-  background-color: #f78da7;
-  color: white;
+  background-color: var(--v400);
+  color: var(--surface);
   font-size: 16px;
   font-family: 'Jua', sans-serif;
   font-weight: bold;
@@ -35,18 +135,18 @@ body * {
   transition: transform 0.3s ease;
 }
 #exitButton:hover {
-  background-color: #d16b80;
+  background-color: var(--v600);
   transform: scale(1.05);
 }
 
 /* ── Lock Again button ── */
 #lockAgainButton {
   margin-top: 20px;
-  background-color: #e898b8;
-  color: white;
+  background-color: var(--v400);
+  color: var(--surface);
   font-size: 16px;
-  font-weight: bold;
-  font-family: 'Jua', sans-serif;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
   border: none;
   border-radius: 20px;
   padding: 10px 24px;
@@ -54,22 +154,23 @@ body * {
   transition: transform 0.25s ease, background-color 0.25s ease;
 }
 #lockAgainButton:hover {
-  background-color: #c87898;
+  background-color: var(--v600);
   transform: scale(1.05);
 }
 
-/* ── Lock screen layout ── */
+/* ── Lock screen ── */
 #lockScreen {
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* ── Heart-shaped padlock wrapper ── */
 .lock-wrapper {
   position: relative;
   width: min(440px, 92vw);
+  will-change: transform;
+  animation: float 5.5s ease-in-out infinite;
 }
 
 .heart-svg {
@@ -98,7 +199,7 @@ body * {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-size: clamp(14px, 4vw, 18px);
-  color: #8a2848;
+  color: var(--v700);
   text-align: center;
   margin: 0;
   line-height: 1.4;
@@ -123,51 +224,55 @@ body * {
   width: 100%;
   aspect-ratio: 1.4 / 1;
   font-size: clamp(10px, 3vw, 14px);
-  background-color: #f0b8d0;
-  color: #9a3858;
-  border: 1px solid #e098b8;
+  background-color: var(--v300);
+  color: var(--v700);
+  border: 1px solid var(--v400);
   border-radius: 6px;
   padding: 0;
   cursor: pointer;
   transition: background-color 0.15s ease, transform 0.1s ease;
-  font-family: 'Jua', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
-.digit-box button:hover {
-  background-color: #e898b8;
-  transform: scale(1.08);
-}
-.digit-box button:active {
-  transform: scale(0.95);
-}
+.digit-box button:hover  { background-color: var(--v400); transform: scale(1.08); }
+.digit-box button:active { transform: scale(0.95); }
 
 .digit-value {
   width: 100%;
   font-size: clamp(15px, 4.5vw, 20px);
-  font-weight: bold;
-  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-family: 'Nunito', sans-serif;
   text-align: center;
   line-height: 1.6;
-  color: #b03060;
+  color: var(--v700);
   box-sizing: border-box;
+  transform-origin: center;
+  will-change: transform;
+}
+.digit-value.changed {
+  animation: digitPop 0.22s cubic-bezier(0.34, 1.36, 0.64, 1);
 }
 
 /* ── Letter screen ── */
 #letterScreen {
   display: none;
-  height: 100vh;
-  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
+  height: 100dvh;
+}
+#letterScreen.visible {
+  animation: screenFadeIn 0.48s cubic-bezier(0.34, 1.1, 0.64, 1) forwards;
 }
 #imageWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 .relativeBox {
   position: relative;
   width: 90vw;
   max-width: 700px;
+  will-change: transform;
+  animation: float 6.5s ease-in-out infinite;
 }
 
 #letterSvg {
@@ -177,15 +282,6 @@ body * {
   overflow: visible;
 }
 
-/*
-  SVG viewBox: 600 × 400
-  QR rect: x=365 y=105 w=180 h=180 (square)
-  Center: cx = 365+90 = 455  →  left = 455/600 = 75.83%
-          cy = 105+90 = 195  →  top  = 195/400 = 48.75%
-  CSS width  = 180/600 = 30%   (% of parent width)
-  CSS height = 180/400 = 45%   (% of parent height, since parent h = parent_w × 400/600)
-  No aspect-ratio — canvas elements ignore it; explicit h% is reliable.
-*/
 #qrCode {
   position: absolute;
   top: 48.75%;
@@ -198,7 +294,6 @@ body * {
   overflow: hidden;
   background: #ffffff;
 }
-
 #qrCode canvas,
 #qrCode img {
   width: 100% !important;
@@ -210,8 +305,8 @@ body * {
   position: absolute;
   top: 48.75%;
   left: 75.83%;
-  width: 30%;
-  height: 45%;
+  width: 30.50%;
+  height: 45.50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   border-radius: 10px;
@@ -226,13 +321,18 @@ body * {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom right, #ffe6f0, #ffd6ec);
-  color: #a20060;
+  background-color: var(--v100);
+  background-image:
+    radial-gradient(ellipse at 25% 30%, rgba(154, 114, 216, 0.24) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 70%, rgba(122, 82, 192, 0.17) 0%, transparent 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='1.4' fill='%237a52c0' opacity='0.13'/%3E%3Ccircle cx='10' cy='10' r='0.9' fill='%237a52c0' opacity='0.09'/%3E%3Ccircle cx='70' cy='70' r='0.9' fill='%237a52c0' opacity='0.09'/%3E%3Ccircle cx='70' cy='10' r='0.65' fill='%237a52c0' opacity='0.07'/%3E%3Ccircle cx='10' cy='70' r='0.65' fill='%237a52c0' opacity='0.07'/%3E%3C/svg%3E"),
+    linear-gradient(145deg, var(--v100) 0%, var(--v200) 100%);
+  color: var(--v700);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Jua', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 28px;
   z-index: 9999;
 }
@@ -247,15 +347,15 @@ body * {
   bottom: 30px;
   width: 100%;
   height: 30px;
-  background: #ffe0ec;
+  background: var(--v200);
   border-radius: 25px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #f78da7, #ffb6c1);
+  background: linear-gradient(90deg, var(--v500), var(--v300));
   width: 0%;
   transition: width 0.3s linear;
 }
@@ -270,10 +370,6 @@ body * {
   z-index: 3;
   pointer-events: none;
 }
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
 .tap-text {
   position: absolute;
   bottom: -40px;
@@ -282,7 +378,7 @@ body * {
   display: none;
   opacity: 0;
   font-size: 24px;
-  color: #a20060;
+  color: var(--v700);
   animation: blink 1s infinite;
   border: none;
   box-shadow: none;
@@ -295,18 +391,6 @@ body * {
 .tap-text.loop {
   animation: tapFadeLoop 1.2s ease-in-out infinite;
 }
-@keyframes tapFadeIn {
-  0%   { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes tapFadeLoop {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
-}
 #loading-screen.exit {
   animation: loaderExitUp 0.6s ease forwards;
-}
-@keyframes loaderExitUp {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
 }

@@ -10,23 +10,29 @@ let isScratching = false;
 
 function changeDigit(index, delta) {
   digits[index] = (digits[index] + delta + 10) % 10;
-  document.getElementById(`digit-${index}`).textContent = digits[index];
+  const el = document.getElementById(`digit-${index}`);
+  el.textContent = digits[index];
+  el.classList.remove('changed');
+  void el.offsetWidth; // force reflow to restart animation
+  el.classList.add('changed');
   checkCode();
 }
 
 function checkCode() {
-  const entered = digits.join('');
-  if (entered === correctCode) {
-    document.getElementById('lockScreen').style.display = 'none';
-    document.getElementById('letterScreen').style.display = 'block';
-    requestAnimationFrame(() => {
-      if (!qrGenerated) {
-        generateQR();
-        qrGenerated = true;
-      }
-      resizeCanvas();
-    });
-  }
+  if (digits.join('') !== correctCode) return;
+  document.getElementById('lockScreen').style.display = 'none';
+  const letterScreen = document.getElementById('letterScreen');
+  letterScreen.style.display = 'block';
+  letterScreen.classList.remove('visible');
+  void letterScreen.offsetWidth;
+  letterScreen.classList.add('visible');
+  requestAnimationFrame(() => {
+    if (!qrGenerated) {
+      generateQR();
+      qrGenerated = true;
+    }
+    resizeCanvas();
+  });
 }
 
 function generateQR() {
@@ -47,7 +53,7 @@ function resizeCanvas() {
   canvas.width = bounds.width;
   canvas.height = bounds.height;
   ctx.globalCompositeOperation = 'source-over';
-  ctx.fillStyle = '#c888a8';
+  ctx.fillStyle = '#a878d8'; // violet scratch overlay
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   scratchComplete = false;
   canvas.style.cursor = 'crosshair';
@@ -80,7 +86,9 @@ function scratch(e) {
 }
 
 function lockAgain() {
-  document.getElementById('letterScreen').style.display = 'none';
+  const letterScreen = document.getElementById('letterScreen');
+  letterScreen.style.display = 'none';
+  letterScreen.classList.remove('visible');
   document.getElementById('lockScreen').style.display = 'flex';
   digits.fill(0);
   for (let i = 0; i < 4; i++) {
@@ -91,7 +99,7 @@ function lockAgain() {
 
 function exitGame() {
   sessionStorage.removeItem('gameLoadedOnce');
-  window.location.href = "../index.html";
+  window.location.href = '../index.html';
 }
 
 document.addEventListener('gesturestart', e => e.preventDefault());
