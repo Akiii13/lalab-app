@@ -103,10 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
       loadingScreen.classList.add('exit');
       setTimeout(() => {
         loadingScreen.style.display = 'none';
-        document.body.style.overflow = '';
         sessionStorage.setItem('valentineLoaded', 'true');
         tryPlayMusic();
-        localStorage.setItem('musicConfirmed', 'yes');
         playIndexVideos();
       }, 600);
       window.removeEventListener('click', continueHandler, { passive: false });
@@ -117,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   if (!alreadyLoaded && loadingScreen && tapText) {
-    document.body.style.overflow = 'hidden';
     animateProgress();
   } else {
     if (loadingScreen) loadingScreen.style.display = 'none';

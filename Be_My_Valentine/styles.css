@@ -36,7 +36,6 @@
 /* ── Root + iOS overscroll fix ──────────────────────────────────────── */
 html {
   height: -webkit-fill-available;
-  overscroll-behavior: none;
   overflow: hidden;
   -webkit-overflow-scrolling: auto;
   background-color: var(--bg);
@@ -60,7 +59,6 @@ body {
   justify-content: center;
   overflow: hidden;
   -webkit-overflow-scrolling: auto;
-  overscroll-behavior: none;
   background-color: transparent; /* let html background show through */
 }
 
