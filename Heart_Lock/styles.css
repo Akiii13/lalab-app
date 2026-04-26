@@ -1,23 +1,25 @@
 @font-face {
   font-family: 'Jua';
   src: url('../fonts/Jua-Regular.woff2') format('woff2'),
-       url('../fonts/Jua-Regular.ttf') format('truetype');
+    url('../fonts/Jua-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Nunito';
   src: url('../fonts/Nunito-VariableFont_wght.woff2') format('woff2-variations'),
-       url('../fonts/Nunito-VariableFont_wght.ttf') format('truetype-variations');
+    url('../fonts/Nunito-VariableFont_wght.ttf') format('truetype-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Playfair Display';
   src: url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.woff2') format('woff2-variations'),
-       url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype-variations');
+    url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype-variations');
   font-weight: 400 900;
   font-style: italic;
   font-display: swap;
@@ -34,39 +36,95 @@
   --v300: #bfa0ec;
   --v200: #dcd2f8;
   --v100: #eee8ff;
-  --v50:  #f6f3ff;
+  --v50: #f6f3ff;
   --surface: #f8f5ff;
 }
 
 /* ── Animations ── */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-9px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
 }
+
 @keyframes screenFadeIn {
-  from { opacity: 0; transform: scale(0.96) translateY(8px); }
-  to   { opacity: 1; transform: scale(1)    translateY(0px); }
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
 }
+
 @keyframes digitPop {
-  0%   { transform: scaleY(0.7) scaleX(0.92); opacity: 0.5; }
-  60%  { transform: scaleY(1.08) scaleX(1.02); }
-  100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+  0% {
+    transform: scaleY(0.7) scaleX(0.92);
+    opacity: 0.5;
+  }
+
+  60% {
+    transform: scaleY(1.08) scaleX(1.02);
+  }
+
+  100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
 }
+
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
+
 @keyframes tapFadeIn {
-  0%   { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 @keyframes tapFadeLoop {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
 }
+
 @keyframes loaderExitUp {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
 /* ── Base — iOS overscroll fix ── */
@@ -78,7 +136,8 @@ html {
   background-color: var(--v100);
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: 'Nunito', sans-serif;
@@ -116,9 +175,10 @@ body * {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 10px);
   left: calc(env(safe-area-inset-left) + 10px);
-  width: 128px;
-  height: 38px;
   background-color: var(--v400);
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--surface);
   font-size: 16px;
   font-family: 'Jua', sans-serif;
@@ -130,6 +190,7 @@ body * {
   z-index: 99;
   transition: transform 0.3s ease;
 }
+
 #exitButton:hover {
   background-color: var(--v600);
   transform: scale(1.05);
@@ -149,6 +210,7 @@ body * {
   cursor: pointer;
   transition: transform 0.25s ease, background-color 0.25s ease;
 }
+
 #lockAgainButton:hover {
   background-color: var(--v600);
   transform: scale(1.05);
@@ -229,8 +291,15 @@ body * {
   transition: background-color 0.15s ease, transform 0.1s ease;
   font-family: 'Nunito', sans-serif;
 }
-.digit-box button:hover  { background-color: var(--v400); transform: scale(1.08); }
-.digit-box button:active { transform: scale(0.95); }
+
+.digit-box button:hover {
+  background-color: var(--v400);
+  transform: scale(1.08);
+}
+
+.digit-box button:active {
+  transform: scale(0.95);
+}
 
 .digit-value {
   width: 100%;
@@ -244,6 +313,7 @@ body * {
   transform-origin: center;
   will-change: transform;
 }
+
 .digit-value.changed {
   animation: digitPop 0.22s cubic-bezier(0.34, 1.36, 0.64, 1);
 }
@@ -253,9 +323,11 @@ body * {
   display: none;
   height: 100dvh;
 }
+
 #letterScreen.visible {
   animation: screenFadeIn 0.48s cubic-bezier(0.34, 1.1, 0.64, 1) forwards;
 }
+
 #imageWrapper {
   display: flex;
   flex-direction: column;
@@ -263,6 +335,7 @@ body * {
   align-items: center;
   height: 100%;
 }
+
 .relativeBox {
   position: relative;
   width: 90vw;
@@ -290,6 +363,7 @@ body * {
   overflow: hidden;
   background: #ffffff;
 }
+
 #qrCode canvas,
 #qrCode img {
   width: 100% !important;
@@ -312,12 +386,27 @@ body * {
 
 /* ── Scratch hint finger ── */
 @keyframes fingerBounce {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-  50%       { transform: translate(-50%, -50%) translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-8px);
+  }
 }
+
 @keyframes fingerFadeIn {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 #scratchHint {
@@ -341,6 +430,7 @@ body * {
   -webkit-backdrop-filter: blur(4px);
   box-shadow: 0 2px 10px rgba(122, 82, 192, 0.18);
 }
+
 #scratchHint.visible {
   display: block;
   animation: fingerFadeIn 0.35s ease forwards, fingerBounce 1.2s ease-in-out 0.35s infinite;
@@ -368,12 +458,14 @@ body * {
   font-size: 28px;
   z-index: 9999;
 }
+
 .progress-container {
   position: relative;
   width: 80%;
   max-width: 300px;
   height: 80px;
 }
+
 .progress-wrapper {
   position: absolute;
   bottom: 30px;
@@ -385,12 +477,14 @@ body * {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
+
 .progress-bar {
   height: 100%;
   background: linear-gradient(90deg, var(--v500), var(--v300));
   width: 0%;
   transition: width 0.3s linear;
 }
+
 #progress-icon {
   position: absolute;
   bottom: 55px;
@@ -402,6 +496,7 @@ body * {
   z-index: 3;
   pointer-events: none;
 }
+
 .tap-text {
   position: absolute;
   bottom: -40px;
@@ -409,6 +504,7 @@ body * {
   text-align: center;
   display: none;
   opacity: 0;
+  font-family: 'Jua', sans-serif;
   font-size: 24px;
   color: var(--v700);
   animation: blink 1s infinite;
@@ -416,13 +512,16 @@ body * {
   box-shadow: none;
   pointer-events: none;
 }
+
 .tap-text.show {
   display: block;
   animation: tapFadeIn 0.8s ease forwards;
 }
+
 .tap-text.loop {
   animation: tapFadeLoop 1.2s ease-in-out infinite;
 }
+
 #loading-screen.exit {
   animation: loaderExitUp 0.6s ease forwards;
 }

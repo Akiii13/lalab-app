@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('gameLoadedOnce', 'true');
         tryPlayMusic();
         localStorage.setItem('musicConfirmed', 'yes');
-        if (exitBtn) exitBtn.style.display = 'block';
+        if (exitBtn) exitBtn.style.display = 'flex';
       }, 600);
       window.removeEventListener('click', continueHandler, { passive: false });
       window.removeEventListener('touchstart', continueHandler, { passive: false });
@@ -225,12 +225,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (fromHub && !alreadyLoaded && loadingScreen && tapText) {
     document.body.style.overflow = 'hidden';
-    if (exitBtn) exitBtn.style.display = 'none';
+    if (exitBtn) exitBtn.style.display = 'flex';
     progressIcon.style.opacity = '1';
     animateProgress();
   } else {
     if (loadingScreen) loadingScreen.style.display = 'none';
-    if (exitBtn) exitBtn.style.display = 'block';
+    if (exitBtn) exitBtn.style.display = 'flex';
     if (hasConfirmed) {
       tryPlayMusic();
     } else {
